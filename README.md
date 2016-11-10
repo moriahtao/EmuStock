@@ -3,7 +3,7 @@ Semester Project of CS5610 WebDev 2016 Fall
 
 ### Authors
 * Fan Yang: yang.fan7@husky.neu.edu 
-* Qianli Ma: 
+* Qianli Ma: ma.qia@husky.neu.edu
 
 ### Description
 EmuStock is a social platform of stock market game playing. The system admins hold challenge seasons, during which users execute stock transactions with given virtual credits. When the season ends, players get a ranking among friends and the global publics.
