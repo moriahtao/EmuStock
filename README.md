@@ -1,7 +1,7 @@
 # EmuStock
 Semester Project of CS5610 WebDev 2016 Fall   
 
-### Authors:  
+### Authors
 * Fan Yang: yang.fan7@husky.neu.edu 
 * Qianli Ma: 
 
