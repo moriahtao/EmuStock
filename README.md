@@ -6,7 +6,7 @@ Semester Project of CS5610 WebDev 2016 Fall
 * Qianli Ma: 
 
 ### Description
-EmuStock is a social platform of stock market game playing. Users execute stock transactions with virtual credits, which is given at the beginning of each challenge season.
+EmuStock is a social platform of stock market game playing. The system admins hold challenge seasons, during which users execute stock transactions with given virtual credits. When the season ends, players get a ranking among friends and the global publics.
 
 ### Actors
 For this online stock emulator, the actors can be *buyers* and *administrators*.  
