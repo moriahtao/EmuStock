@@ -25,14 +25,14 @@
             return $http.jsonp(urlBuilder('Quote', 'symbol', symbol));
         }
 
-        function chart(chartReq) {
-            chartReq = JSON.stringify({
+        function chart(symbol) {
+            var chartReq = JSON.stringify({
                 Normalized: false,
-                NumberOfDays: 5,
+                NumberOfDays: 30,
                 DataPeriod: 'Day',
                 Elements: [
                     {
-                        Symbol: 'AAPL',
+                        Symbol: symbol,
                         Type: 'price',
                         Params: ["ohlc"],
                     }
@@ -44,24 +44,62 @@
 
     function PlaygroundAppController(StockService) {
         var vm = this;
-        StockService
-            .lookup('fb')
-            .success(function (data) {
-                console.log(data);
-            });
-        StockService
-            .quote('aapl')
-            .success(function (data) {
-                console.log(data);
-            });
-        StockService
-            .chart()
-            .success(function (data) {
-                console.log(data);
-            })
-            .error(function (err) {
-                console.error(err);
-            });
+
+        vm.lookup = lookup;
+        vm.quote = quote;
+
+        function lookup() {
+            StockService
+                .lookup(vm.input)
+                .success(function (data) {
+                    console.log(data);
+                    vm.result = data;
+                });
+        }
+
+        function quote(symbol) {
+            StockService
+                .quote(symbol)
+                .success(function (data) {
+                    console.log(data);
+                    vm.details = data;
+                });
+            chart(symbol);
+        }
+
+        function chart(symbol) {
+            StockService
+                .chart(symbol)
+                .success(function (data) {
+                    console.log(data);
+                    vm.chart = data;
+                    var data = [];
+                    for (var i = 0; i < vm.chart.Positions.length; i++) {
+                        data.push([vm.chart.Positions[i], vm.chart.Elements[0].DataSeries.close.values[i]]);
+                    }
+                    $('#stock-chart').highcharts('StockChart', {
+
+                        rangeSelector: {
+                            selected: 1
+                        },
+
+                        title: {
+                            text: 'AAPL Stock Price'
+                        },
+
+                        series: [{
+                            name: 'AAPL',
+                            data: data,
+                            tooltip: {
+                                valueDecimals: 2
+                            }
+                        }]
+                    });
+                })
+                .error(function (err) {
+                    console.error(err);
+                });
+        }
     }
 
 })();

@@ -1,17 +1,51 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="PlaygroundApp" ng-controller="PlaygroundAppController as model">
+<html lang="en" ng-app="PlaygroundApp" ng-controller="PlaygroundAppController as vm">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Title</title>
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
           crossorigin="anonymous"
     >
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"
+    ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
     <script src="app.js"></script>
 </head>
 <body>
-<h1>{{model.info}}</h1>
+<div class="container">
+    <form class="text-center">
+        <input type="text" placeholder="company or symbol" ng-model="vm.input">
+        <input type="button" value="go" ng-click="vm.lookup()">
+    </form>
+    <table class="table table-striped" ng-if="vm.result">
+        <thead>
+        <tr>
+            <th>Symbol</th>
+            <th>Name</th>
+            <th>Exchange</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in vm.result">
+            <td>{{item.Symbol}}</td>
+            <td><a ng-click="vm.quote(item.Symbol)">{{item.Name}}</a></td>
+            <td>{{item.Exchange}}</td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="3">Total Results: {{vm.result.length}}</td>
+        </tr>
+        </tfoot>
+    </table>
+    <div>{{vm.details}}</div>
+    <div id="stock-chart"></div>
+</div>
+<script src="https://code.highcharts.com/stock/highstock.js"></script>
 </body>
 </html>
