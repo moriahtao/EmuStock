@@ -6,8 +6,8 @@
 // OTHER_DISPLAY_MODE : where this controller is usd in display other users' following&follower
 
 var SEARCH_MODE = 0;
-var LIST_MODE  = 1;
-var FOLLOW_MODE  = 2;
+var SELF_DISPLAY_MODE  = 1;
+var OTHER_DISPLAY_MODE  = 2;
 
 (function () {
     angular
@@ -17,17 +17,16 @@ var FOLLOW_MODE  = 2;
     function UserController($http, $routeParams) {
         var vm = this;
 
-        vm.term = ""; // used for user search
+        vm.uid = $routeParams.uid;
+
         vm.users = [];
         vm.user = {};
+        vm.term = ""; // used for user search
 
         // todo : judge mode by routeParams
-        vm.mode = FOLLOW_MODE;
+        vm.mode = SELF_DISPLAY_MODE;
 
         switch(vm.mode) {
-            case SEARCH_MODE:
-
-                break;
             case SELF_DISPLAY_MODE:
 
                 break;
@@ -38,7 +37,7 @@ var FOLLOW_MODE  = 2;
 
 
         vm.follow = function() {
-            $http.post("/user/" + vm.uid + "/follow/" + vm.user._id)
+            $http.post("/api/user/" + vm.uid + "/follow/" + vm.user._id)
                 .then(
                     function() {
                         alert("follow success.");
@@ -50,12 +49,12 @@ var FOLLOW_MODE  = 2;
         };
 
         vm.unfollow = function() {
-            $http.delete("/user/" + vm.uid + "/follow/" + vm.user._id)
+            $http.delete("/api/user/" + vm.uid + "/follow/" + vm.user._id)
                 .then(
                     function() {
                         alert("unfollow success.");
                         // delete User from Users
-                        if (vm.mode == FOLLOW_MODE) {
+                        if (vm.mode == SELF_DISPLAY_MODE) {
                             vm.users = vm.users.filter(function(x){return x._id != vm.users._id;});
                         }
                     }
@@ -63,7 +62,7 @@ var FOLLOW_MODE  = 2;
         };
 
         vm.search = function() {
-            $http.get("api/user/?term=" + vm.term)
+            $http.get("/api/user/?term=" + vm.term)
                 .then(
                     function(res) { vm.users = res; }
                 )
