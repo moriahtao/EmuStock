@@ -15,7 +15,6 @@
             <div class="col-lg-12">
                 <div class="intro-text">
                     <span class="name">EmuStock</span>
-                    <!-- <hr class="star-light">-->
                     <span class="skills">How do you like or dislike a stock? Share your own reviews!</span>
                     <div class="contianer">
                         <input ng-model="vm.user.username"
@@ -28,11 +27,11 @@
                                placeholder="Password"/>
                         <br>
 
-                        <a href=""
+                        <a href="#{{vm.shared.getRoute('timeline')}}"
                            class="btn btn-info btn-block" type="button">
                             <span><strong>Login</strong></span>
                         </a>
-                        <a href=""
+                        <a href="#{{vm.shared.getRoute('register')}}"
                            class="btn btn-success btn-block" type="button">
                             <span><strong>Register</strong></span>
                         </a>

@@ -15,9 +15,9 @@
            class="form-control"
            placeholder="Verify Password"/>
     <a class="btn btn-primary btn-block"
-       href="#/search">
-        <!--href="#/user/:uid"-->Register</a>
+       href="#{{vm.shared.getRoute('register')}}">
+       Register</a>
     <a class="btn btn-danger btn-block"
-       href="#/login"
+       href="#{{vm.shared.getRoute('login')}}"
        role="button">Cancel</a>
 </div>

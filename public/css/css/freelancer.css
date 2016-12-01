@@ -77,11 +77,11 @@ hr.star-primary:after {
 header {
   text-align: center;
 
-  background: #18bc9c;
+  background: #4e5d6c;
   color: white;
   opacity: 0.9;
   background-position: center;
- /* background: url("../img/header.jpg");*/
+  background: url("../img/header.jpg");
 
   position:fixed;
   width: 100%;
@@ -344,7 +344,7 @@ div.stacked{
 
 /*From the home index for search results*/
 .prices{
-  background: url(../img/123.jpg) 50% no-repeat;
+  /*background: url(../img/bg/food.jpg) 50% no-repeat;*/
   background-size: cover;
 }
 

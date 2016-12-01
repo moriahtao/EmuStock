@@ -1,10 +1,54 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button"
+                    class="navbar-toggle"
+                    data-toggle="collapse"
+                    ng-init="isCollapsed = true"
+                    ng-click="isCollapsed = !isCollapsed">
+                <!--data-target="#bs-example-navbar-collapse-1">-->
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand">EmuStock</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+
+        <div class="navbar-collapse" ng-class="{collapse: isCollapsed}">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="page-scroll">
+                    <a ng-click="vm.logout()"><span class="fa fa-sign-out"></span>Logout</a>
+                </li>
+                <li class="page-scroll">
+                    <a href="#{{vm.shared.getRoute('timeline')}}">Profile</a>
+                </li>
+                <li class="page-scroll">
+                    <a href="#{{vm.shared.getRoute('mystock')}}">My Stock</a>
+                </li>
+                <li class="page-scroll">
+                    <a href="#{{vm.shared.getRoute('mystock')}}">My Follower</a>
+                </li>
+                <li class="page-scroll">
+                    <a href="#{{vm.shared.getRoute('mystock')}}">My Following</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+
 <div class="container">
 
     <div ng-repeat="comment in vm.comments">
-        <h2>comment.stock</h2>
+        <h2>{{comment.stock}}</h2>
         <blockquote>
-            <p>comment.text</p>
-            <small>comment.createDate</small>
+            <p>{{comment.text}}</p>
+            <small>{{comment.createDate}}</small>
         </blockquote>
     </div>
 </div>
