@@ -16,6 +16,8 @@ var FOLLOW_MODE  = 1;
         // todo : judge mode by routeParams
         vm.mode = FOLLOW_MODE;
         vm.uid = $routeParams.uid;
+
+        // todo : initialize stocks
         vm.stocks = [];
         vm.stock = {};
 
