@@ -23,10 +23,14 @@
             },
             timeline: {
                 route: '/timeline',
-                view: 'views/timeline.view.cient.html',
+                view: 'views/timeline.view.client.html',
                 controller: 'TimelineController',
             },
-
+            stocks: {
+                route: '/stocks',
+                view: 'views/stocks.view.client.html',
+                controller: 'StocksController',
+            }
         };
 
         return {
