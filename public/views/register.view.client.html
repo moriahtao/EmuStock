@@ -1,0 +1,23 @@
+
+<div class="container">
+
+    <h1 class="center-any-text">Register</h1>
+    <input ng-model="vm.user.username"
+           type="text"
+           class="form-control"
+           placeholder="Username"/>
+    <input ng-model="vm.user.password"
+           type="password"
+           class="form-control"
+           placeholder="Password"/>
+    <input ng-model="vm.user.verpass"
+           type="password"
+           class="form-control"
+           placeholder="Verify Password"/>
+    <a class="btn btn-primary btn-block"
+       href="#/search">
+        <!--href="#/user/:uid"-->Register</a>
+    <a class="btn btn-danger btn-block"
+       href="#/login"
+       role="button">Cancel</a>
+</div>
