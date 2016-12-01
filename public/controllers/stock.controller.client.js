@@ -37,19 +37,19 @@ var DETAIL_MODE = 3;
 
 
         vm.follow = function() {
-            $http.post("/api/user/" + vm.uid + "/stock/" + vm.stock.symbol)
+            UserService.followUser()
                 .then(
-                    function() {
-                        alert("follow success.");
-                    },
-                    function() {
-                        alert("follow failed. try again later");
-                    }
-                );
+                function() {
+                    alert("follow success.");
+                },
+                function() {
+                    alert("follow failed. try again later");
+                }
+            );
         };
 
         vm.unfollow = function() {
-            $http.delete("/api/user/" + vm.uid + "/stock/" + vm.stock.symbol)
+            UserService.unfollowUser()
                 .then(
                     function() {
                         alert("unfollow success.");
@@ -62,7 +62,7 @@ var DETAIL_MODE = 3;
         };
 
         vm.search = function() {
-            StockService.search()
+            StockService.lookup()
                 .then(
                     function(res) {
                         vm.stocks = res.data;

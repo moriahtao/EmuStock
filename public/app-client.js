@@ -1,3 +1,4 @@
 (function () {
-    angular.module("EmuStock", ['ngRoute']);
+    angular
+        .module("EmuStock", ['ngRoute']);
 })();
