@@ -21,6 +21,12 @@
                 view: 'views/profile.view.client.html',
                 controller: 'ProfileController',
             },
+            timeline: {
+                route: '/timeline',
+                view: 'views/timeline.view.cient.html',
+                controller: 'TimelineController',
+            },
+
         };
 
         return {
@@ -36,7 +42,7 @@
          * note: priorDict is used to map keys prior to $routeParams
          * */
         function getRoute(routeKey, priorDict) {
-            return routeMap[routeKey].replace(/:([^\/]+)/g, function (_, key) {
+            return maps[routeKey].route.replace(/:([^\/]+)/g, function (_, key) {
                 return priorDict && key in priorDict ?
                     priorDict[key] : $routeParams[key];
             });
