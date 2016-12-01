@@ -73,10 +73,14 @@
                 .success(function (data) {
                     console.log(data);
                     vm.chart = data;
-                    var data = [];
-                    for (var i = 0; i < vm.chart.Positions.length; i++) {
-                        data.push([vm.chart.Positions[i], vm.chart.Elements[0].DataSeries.close.values[i]]);
+                    var points = [];
+                    for (var i = 0; i < vm.chart.Dates.length; i++) {
+                        points.push([
+                            Date.parse(vm.chart.Dates[i]),
+                            vm.chart.Elements[0].DataSeries.close.values[i],
+                        ]);
                     }
+                    console.log('xxx', points)
                     $('#stock-chart').highcharts('StockChart', {
 
                         rangeSelector: {
@@ -87,13 +91,15 @@
                             text: 'AAPL Stock Price'
                         },
 
-                        series: [{
-                            name: 'AAPL',
-                            data: data,
-                            tooltip: {
-                                valueDecimals: 2
-                            }
-                        }]
+                        series: [
+                            {
+                                name: 'AAPL',
+                                data: points,
+                                tooltip: {
+                                    valueDecimals: 2
+                                },
+                            },
+                        ]
                     });
                 })
                 .error(function (err) {
