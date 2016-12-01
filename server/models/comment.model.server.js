@@ -3,4 +3,4 @@ module.exports = function (db) {
         text: String,
         replyTo: {type: db.Schema.ObjectId, ref: 'CommentModel'},
     }));
-}
+};
