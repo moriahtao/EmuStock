@@ -3,15 +3,23 @@
         .module('EmuStock')
         .config(Config);
 
-    function Config($routeProvider) {
+    function Config($routeProvider, SharedServiceProvider) {
+        var maps = SharedServiceProvider.$get().maps;
+
+        for (var key in maps) {
+            var item = maps[key];
+            $routeProvider
+                .when(item.route, {
+                    templateUrl: item.view,
+                    controller: item.controller,
+                    controllerAs: 'vm',
+                    resolve: item.isPublic ? {} : {},
+                });
+        }
+
         $routeProvider
-            .when('/home', {
-                templateUrl: 'views/home.view.client.html',
-                controller: 'HomeController',
-                controllerAs: 'vm',
-            })
             .otherwise({
-                redirectTo: '/home',
+                redirectTo: maps.login.route,
             });
     }
 })();

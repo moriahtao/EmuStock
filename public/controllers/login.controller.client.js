@@ -1,9 +1,9 @@
 (function () {
     angular
         .module('EmuStock')
-        .controller('HomeController', HomeController);
+        .controller('LoginController', LoginController);
 
-    function HomeController() {
+    function LoginController() {
         var vm = this;
         vm.test = 'go for it';
     }
