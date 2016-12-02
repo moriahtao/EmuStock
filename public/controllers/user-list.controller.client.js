@@ -1,38 +1,34 @@
-// used in following page
+// this controller can be reused in 4 situations:
+// 1. self.following
+// 2. self.followed
+// 3. other.following
+// 4. other.followed
+
+// We do not allow follow and unfollow operation
+// user can only follow/unfollow user in detail page
+
 (function () {
     angular
         .module('EmuUser')
         .controller('UserListController', UserListController);
 
-    function UserListController($routeParams, UserService) {
+    function UserListController($location, $routeParams, UserService) {
         var vm = this;
+        var path = $location.path();
+        vm.uid = $routeParams.uid;
+        vm.users = [];
 
-        vm.self_uid = $routeParams.self_uid;
-
-
-        vm.follow = function(f_uid) {
-            UserService.followUser(vm.self_uid, f_uid)
-                .then(
-                    function() {
-                        alert("follow success.");
-                    },
-                    function() {
-                        alert("follow failed. try again later");
+        // initialization : get user profile to know whether this stock is followed
+        UserService.findUserById(vm.uid)
+            .then(
+                function(res){
+                    if (path.include("following")) {
+                        vm.users = res.data.following;
                     }
-                );
-        };
-
-        vm.unfollow = function(uf_uid) {
-            UserService.unfollowUser(vm.self_uid, uf_uid)
-                .then(
-                    function() {
-                        alert("unfollow success.");
-                        // delete User from Users
-                        if (vm.mode == SELF_DISPLAY_MODE) {
-                            vm.users = vm.users.filter(function(x){return x._id != vm.users._id;});
-                        }
+                    if (path.include("followed")) {
+                        vm.users = res.data.followed;
                     }
-                );
-        };
+                }
+            );
     }
 })();
