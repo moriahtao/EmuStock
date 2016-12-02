@@ -23,3 +23,25 @@
             });
     }
 })();
+
+
+
+
+/*
+Proposed usl
+
+/user/:uid/self -> profle controller
+/user/:uid/other -> user-detail controller
+
+/user/search -> user-search controller
+ /user/followed -> user-list controller
+/user/following -> user-list controller
+
+/user/:uid/stocks -> stock-list controller
+/stock/:symbol -> stock-detail controller
+/stock/search -> stock-search controller
+
+
+
+
+ */
