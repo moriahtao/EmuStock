@@ -19,39 +19,6 @@
                     }
                 }
             );
-
-        vm.follow = function(symbol) {
-            UserService.followStock(vm.uid, symbol)
-                .then(
-                    function() {
-                        for(var i=0; i<vm.stocks.length; i++){
-                            if (vm.stocks[i].symbol == symbol){
-                                vm.stocks.followed = true;
-                                break;
-                            }
-                        }
-                        alert("follow success.");
-                    },
-                    function() {
-                        alert("follow failed. try again later");
-                    }
-                );
-        };
-
-        vm.unfollow = function(symbol) {
-            UserService.unfollowStock(vm.uid, symbol)
-                .then(
-                    function() {
-                        for(var i=0; i<vm.stocks.length; i++){
-                            if (vm.stocks[i].symbol == symbol){
-                                vm.stocks.followed = false;
-                                break;
-                            }
-                        }
-                        alert("unfollow success.");
-                    }
-                );
-        };
     }
 })();
 
