@@ -1,4 +1,6 @@
-// used in following page
+/**
+ * Created by ChienliMa on 02/12/2016.
+ */
 (function () {
     angular
         .module('EmuUser')
@@ -7,11 +9,15 @@
     function UserListController($routeParams, UserService) {
         var vm = this;
 
-        vm.self_uid = $routeParams.self_uid;
+        vm.uid = $routeParams.uid;
 
+        vm.users = [];
+        vm.user = {};
+        vm.term = ""; // used for user search
+        vm.users = {};
 
         vm.follow = function(f_uid) {
-            UserService.followUser(vm.self_uid, f_uid)
+            UserService.followUser(vm.uid, f_uid)
                 .then(
                     function() {
                         alert("follow success.");
@@ -23,7 +29,7 @@
         };
 
         vm.unfollow = function(uf_uid) {
-            UserService.unfollowUser(vm.self_uid, uf_uid)
+            UserService.unfollowUser(vm.uid, uf_uid)
                 .then(
                     function() {
                         alert("unfollow success.");
@@ -33,6 +39,13 @@
                         }
                     }
                 );
+        };
+
+        vm.search = function() {
+            UserService.searchUserByUsername(vm.term)
+                .then(
+                    function(res) { vm.users = res; }
+                )
         };
     }
 })();

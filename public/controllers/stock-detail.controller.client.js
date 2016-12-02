@@ -10,8 +10,6 @@
         vm.stock = {symbol : $routeParams.symbol, followed : false};
         vm.term = "stock name";
 
-
-
         // get user profile to know whether this stock is followed
         UserService.findUserById(vm.uid)
             .then(

@@ -1,71 +1,71 @@
-// User controller is reused by multiple view. Therefore it has three modes.
-
-// mode is either:
-// SEARCH_MODE : where this controller is used in user searching
-// SELF_DISPLAY_MODE : where this controller is used in display current user's following&follower
-// OTHER_DISPLAY_MODE : where this controller is usd in display other users' following&follower
-
-var SEARCH_MODE = 0;
-var SELF_DISPLAY_MODE  = 1;
-var OTHER_DISPLAY_MODE  = 2;
-
 (function () {
     angular
         .module('EmuUser')
-        .controller('UserController', UserController);
+        .controller('UserDetailController', UserDetailController);
 
-    function UserController($http, $routeParams) {
+    function UserDetailController($routeParams, UserService) {
         var vm = this;
 
-        vm.uid = $routeParams.uid;
+        vm.self_uid = $routeParams.self_uid;
+        vm.other_uid = $routeParams.other_uid;
 
-        vm.users = [];
-        vm.user = {};
-        vm.term = ""; // used for user search
+        vm.self = null;
+        vm.other = null;
 
-        // todo : judge mode by routeParams
-        vm.mode = SELF_DISPLAY_MODE;
+        // get user profile to know whether this stock is followed
+        UserService.findUserById(vm.self_uid)
+            .then(
+                function(res){
+                    vm.self = res.data;
+                    if(vm.other) {
+                        setFollowed(); // in the end of file
+                    }
+                }
+            );
 
-        switch(vm.mode) {
-            case SELF_DISPLAY_MODE:
+        UserService.findUserById(vm.other_uid)
+            .then(
+                function(res){
+                    vm.other = res.data;
+                    if(vm.self) {
+                        setFollowed(); // in the end of file
+                    }
+                }
+            );
 
-                break;
-            case OTHER_DISPLAY_MODE:
-
-                break;
-        }
-
-
+        // functions
         vm.follow = function() {
-            $http.post("/api/user/" + vm.uid + "/follow/" + vm.user._id)
+            $http.post("/api/user/" + vm.self_uid + "/follow/" + vm.other_uid)
                 .then(
                     function() {
                         alert("follow success.");
+                        vm.other.followed = true;
                     },
                     function() {
+                        vm.other.followed = false;
                         alert("follow failed. try again later");
                     }
                 );
         };
 
         vm.unfollow = function() {
-            $http.delete("/api/user/" + vm.uid + "/follow/" + vm.user._id)
+            $http.delete("/api/user/" + vm.self_uid + "/follow/" + vm.other_uid)
                 .then(
                     function() {
                         alert("unfollow success.");
-                        // delete User from Users
-                        if (vm.mode == SELF_DISPLAY_MODE) {
-                            vm.users = vm.users.filter(function(x){return x._id != vm.users._id;});
-                        }
+                        vm.other.followed = false;
                     }
                 );
         };
 
-        vm.search = function() {
-            $http.get("/api/user/?term=" + vm.term)
-                .then(
-                    function(res) { vm.users = res; }
-                )
-        };
+        // helper function
+        function setFollowed(){
+            for(var i=0; i<vm.self.following; i++){
+                if(vm.other_uid == vm.self.following[i]) {
+                    vm.other.followed = true;
+                    break
+                }
+            }
+        }
     }
 })();
