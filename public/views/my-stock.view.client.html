@@ -1,10 +1,81 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button"
+                    class="navbar-toggle"
+                    data-toggle="collapse"
+                    ng-init="isCollapsed = true"
+                    ng-click="isCollapsed = !isCollapsed">
+                <!--data-target="#bs-example-navbar-collapse-1">-->
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand">EmuStock</a>
+        </div>
 
-</body>
-</html>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="navbar-collapse" ng-class="{collapse: isCollapsed}">
+            <ul class="nav navbar-nav navbar-right">
+
+                <li class="page-scroll">
+                    <a href="#{{vm.shared.getRoute('timeline')}}">TimeLine</a>
+                </li>
+                <li class="page-scroll">
+                    <a href="#{{vm.shared.getRoute('mystock')}}">My Stock</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Social <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#{{vm.shared.getRoute('follower')}}">My follower</a></li>
+                        <li><a href="#{{vm.shared.getRoute('following')}}">My following</a></li>
+                    </ul>
+                </li>
+                <li class="page-scroll">
+                    <a ng-click="vm.logout()"><span class="fa fa-sign-out"></span>Logout</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+
+<div class="container top">
+    <ul class="list-group">
+        <li ng-repeat="stock in vm.stocks" class="list-group-item">
+            <a href="#">
+                {{stock.name}}
+            </a>
+            <!--use modal to show the chart of a stock-->
+            <!-- Trigger the modal with a glyphicon -->
+            <span class="glyphicon glyphicon-eye-open pull-right" data-toggle="modal" data-target="#myModal"></span>
+        </li>
+    </ul>
+
+
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">stock chart</h4>
+                </div>
+                <div class="modal-body">
+                    <!--TO DO-->
+                    <div id="stock-chart"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-
+<!--navigation-->
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -21,14 +21,22 @@
 
         <div class="navbar-collapse" ng-class="{collapse: isCollapsed}">
             <ul class="nav navbar-nav navbar-right">
-                <li class="page-scroll">
-                    <a ng-click="vm.logout()"><span class="fa fa-sign-out"></span>Logout</a>
-                </li>
+
                 <li class="page-scroll">
                     <a href="#{{vm.shared.getRoute('timeline')}}">TimeLine</a>
                 </li>
                 <li class="page-scroll">
                     <a href="#{{vm.shared.getRoute('mystock')}}">My Stock</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Social <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#{{vm.shared.getRoute('follower')}}">My follower</a></li>
+                        <li><a href="#{{vm.shared.getRoute('following')}}">My following</a></li>
+                    </ul>
+                </li>
+                <li class="page-scroll">
+                    <a ng-click="vm.logout()"><span class="fa fa-sign-out"></span>Logout</a>
                 </li>
             </ul>
         </div>
