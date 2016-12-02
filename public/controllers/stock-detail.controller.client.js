@@ -7,9 +7,26 @@
         var vm = this;
 
         vm.uid = $routeParams.uid;
-        vm.stock = {symbol : $routeParams.symbol};
+        vm.stock = {symbol : $routeParams.symbol, followed : false};
         vm.term = "stock name";
 
+
+
+        // get user profile to know whether this stock is followed
+        UserService.findUserById(vm.uid)
+            .then(
+                function(res){
+                    var user = res.data;
+                    for(var i=0; i<user.stocks; i++){
+                        if(vm.stock.symbol == user.stocks[i]) {
+                            vm.stock.followed = true;
+                            break
+                        }
+                    }
+                }
+            );
+
+        // get stock details
         StockService.quote(vm.stock.symbol)
             .then(
                 function(res) {
