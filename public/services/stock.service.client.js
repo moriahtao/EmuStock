@@ -1,14 +1,14 @@
 (function () {
     angular
         .module('EmuStock')
-        .factory('StockService', StockService)
+        .factory('StockService', StockService, UserService);
 
     function StockService($http) {
         return {
             lookup: lookup,
             quote: quote,
             chart: chart
-        }
+        };
 
         function urlBuilder(fn, key, value) {
             var base = 'http://dev.markitondemand.com/MODApis/Api/v2/';
@@ -33,9 +33,9 @@
                     {
                         Symbol: symbol,
                         Type: 'price',
-                        Params: ["ohlc"],
+                        Params: ["ohlc"]
                     }
-                ],
+                ]
             });
             return $http.jsonp(urlBuilder('InteractiveChart', 'parameters', chartReq));
         }

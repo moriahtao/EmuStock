@@ -8,11 +8,11 @@
 
     function UserService($http) {
         return {
-            findUserByUsername : function(username) {
+            searchUserByUsername : function(username) {
                 return $http.get("/api/user/?username=" + username);
             },
 
-            findUserByid : function(uid) {
+            findUserById : function(uid) {
                 return $http.get("/api/user/" + uid);
             },
 

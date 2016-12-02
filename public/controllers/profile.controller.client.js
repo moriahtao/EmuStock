@@ -3,25 +3,26 @@
         .module('EmuStock')
         .controller('ProfileController', ProfileController);
 
-    function ProfileController($http, $routeParams) {
+    function ProfileController($routeParams, UserService) {
         var vm = this;
         vm.user = {};
+        vm.uid = $routeParams.uid;
 
-        $http.get("/api/user/" + $routeParams.uid)
+        UserService.findUserById(vm.uid)
             .then(
                 function(res) {
                     vm.user = res.data;
                 },
                 function(res) {
-                    alert("error fetch user profile");
+                    alert("error fetch user profile: " + res);
                 }
             );
 
         vm.update = function() {
-            $http.put("/api/user/" + $routeParams.uid, vm.user)
+            UserService.updateUser(vm.uid, vm.user)
                 .then(
-                    function(res) { alert("update successed"); },
-                    function(res) { alert("update failed, please try again later."); }
+                    function() { alert("update successed"); },
+                    function() { alert("update failed, please try again later."); }
                 )
         }
     }
