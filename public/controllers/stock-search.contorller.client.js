@@ -6,7 +6,7 @@
         .module('EmuStock')
         .controller('StockSearchController', StockSearchController);
 
-    function StockSearchController($routeParams, UserService, StockService) {
+    function StockSearchController($routeParams, StockService) {
         var vm = this;
 
         vm.uid = $routeParams.uid;

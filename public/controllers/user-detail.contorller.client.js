@@ -60,8 +60,8 @@
 
         // helper function
         function setFollowed(){
-            for(var i=0; i<vm.self.following; i++){
-                if(vm.other_uid == vm.self.following[i]) {
+            for(var i=0; i<vm.self.followings; i++){
+                if(vm.other_uid == vm.self.followings[i]) {
                     vm.other.followed = true;
                     break
                 }

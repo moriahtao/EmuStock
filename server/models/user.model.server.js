@@ -17,6 +17,6 @@ module.exports = function (db) {
         facebook: {
             id: String,
             token: String
-        },
+        }
     }));
 };

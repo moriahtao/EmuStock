@@ -22,11 +22,11 @@
         UserService.findUserById(vm.uid)
             .then(
                 function(res){
-                    if (path.include("following")) {
-                        vm.users = res.data.following;
+                    if (path.include("followings")) {
+                        vm.users = res.data.followings;
                     }
-                    if (path.include("followed")) {
-                        vm.users = res.data.followed;
+                    if (path.include("followers")) {
+                        vm.users = res.data.followers;
                     }
                 }
             );
