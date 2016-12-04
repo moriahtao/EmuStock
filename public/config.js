@@ -27,21 +27,23 @@
 
 
 
-/*
-Proposed usl
-
+/* Proposed usl
 /user/:uid/self -> profle controller
 /user/:uid/other -> user-detail controller
 
 /user/search -> user-search controller
- /user/followed -> user-list controller
+/user/followed -> user-list controller
 /user/following -> user-list controller
 
 /user/:uid/stocks -> stock-list controller
 /stock/:symbol -> stock-detail controller
 /stock/search -> stock-search controller
 
+todo:
+use following url:
+    /self/:self_id/
+    /self/:self_id/other/:other_id/
+    /self/:self_id/stock/:symbol/
 
-
-
+    /self/:self_id/other/:other_id/(following/followed/stocks)
  */

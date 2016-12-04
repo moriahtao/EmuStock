@@ -14,9 +14,6 @@
             .then(
                 function(res) {
                     vm.stocks = res.data.stocks;
-                    for(var i=0; i<vm.stocks.length; i++){
-                        vm.stocks.followed = true;
-                    }
                 }
             );
     }
