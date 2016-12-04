@@ -35,7 +35,7 @@
 
         // functions
         vm.follow = function() {
-            $http.post("/api/user/" + vm.self_uid + "/follow/" + vm.other_uid)
+            UserService.followUser(vm.self_uid, vm.other_uid)
                 .then(
                     function() {
                         alert("follow success.");
@@ -49,7 +49,7 @@
         };
 
         vm.unfollow = function() {
-            $http.delete("/api/user/" + vm.self_uid + "/follow/" + vm.other_uid)
+            UserService.unfollowUser(vm.self_uid, vm.other_uid)
                 .then(
                     function() {
                         alert("unfollow success.");
