@@ -1,24 +1,28 @@
+/**
+ * Created by ChienliMa on 05/12/2016.
+ */
 (function () {
     angular
         .module('EmuStock')
-        .controller('LoginController', LoginController);
+        .controller('RegisterController', RegisterController);
 
-    function LoginController($http, $location) {
+    function RegisterController($http, $location) {
         var vm = this;
 
         vm.user = {};
         vm.username = "";
         vm.password = "";
 
-        // login with session enabled
-        vm.login = function() {
-            $http.post("/api/login", vm.user)
+        // register with session
+        vm.register = function() {
+            return $http.post("/api/register", vm.user)
                 .then(
                     function(res) {
+                        alert("Register success");
                         $location.path("/profile/" + res.data._id);
                     },
                     function(res) {
-                        alert("Invalid username password pair");
+                        alert(res.data);
                     }
                 );
         };
