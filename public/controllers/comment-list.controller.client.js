@@ -12,23 +12,28 @@
         .module('EmuStock')
         .controller('CommentListController', CommentListController);
 
-    function CommentListController($location, $routeParams, CommentService) {
+    function CommentListController($routeParams, CommentService) {
         var vm = this;
-        var path = $location.path();
-        vm.uid = $routeParams.uid;
-        vm.users = [];
+        vm.comments = null;
 
-        // initialization : get user profile to know whether this stock is followed
-        UserService.findUserById(vm.uid)
-            .then(
-                function(res){
-                    if (path.include("followings")) {
-                        vm.users = res.data.followings;
+        if ($routeParams.params.uid != null) {
+            vm.uid = $routeParams.params.uid;
+            CommentService.getCommentByUser(vm.uid)
+                .then(
+                    function(res) {
+                        vm.comments = res.data;
                     }
-                    if (path.include("followers")) {
-                        vm.users = res.data.followers;
+                );
+        } else if ($routeParams.params.symbol != null) {
+            vm.symbol = $routeParams.params.symbol;
+            CommentService.getCommentByStock(vm.symbol)
+                .then(
+                    function(res) {
+                        vm.comments = res.data;
                     }
-                }
-            );
+                );
+        }
+
+
     }
 })();
