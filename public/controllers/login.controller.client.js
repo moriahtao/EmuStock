@@ -21,19 +21,5 @@
                     }
                 );
         };
-
-        // register with session
-        vm.register = function() {
-            return $http.post("/api/register", vm.user)
-                .then(
-                    function(res) {
-                        alert("Register success");
-                        $location.path("/profile/" + res.data._id);
-                    },
-                    function(res) {
-                        alert(res.data);
-                    }
-                );
-        };
     }
 })();
