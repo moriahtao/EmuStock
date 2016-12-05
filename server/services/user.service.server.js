@@ -1,9 +1,9 @@
 module.exports = function (app, models) {
 
-    app.get('/api/user', currentUser);
-    app.post('/api/user/create', createUser);
-    app.put('/api/user/update', updateUser);
-    app.delete('/api/user/delete', deleteUser);
+    app.get('/api/user/', currentUser);
+    app.post('/api/user/', createUser);
+    app.put('/api/user/', updateUser);
+    app.delete('/api/user/', deleteUser);
 
     function currentUser(req, res) {
 

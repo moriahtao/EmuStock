@@ -17,7 +17,7 @@
             },
 
             updateUser : function (uid, user) {
-                return $http.post("/api/user/" + uid, user);
+                return $http.put("/api/user/" + uid, user);
             },
 
             followUser : function(uid, f_uid) {
