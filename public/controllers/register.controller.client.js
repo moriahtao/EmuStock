@@ -10,12 +10,9 @@
         var vm = this;
 
         vm.user = {};
-        vm.username = "";
-        vm.password = "";
 
-        // register with session
         vm.register = function() {
-            return $http.post("/api/register", vm.user)
+            return $http.post("/api/user/register", vm.user)
                 .then(
                     function(res) {
                         alert("Register success");

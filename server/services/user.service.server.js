@@ -1,10 +1,15 @@
 module.exports = function (models) {
 
     return {
+        findUserByUsername: findUserByUsername,
         createUser: createUser,
         updateUser: updateUser,
         deleteUser: deleteUser,
     };
+
+    function findUserByUsername(username) {
+        return models.user.findOne({username: username});
+    }
 
     function createUser(user) {
         return models.user.create(user);
