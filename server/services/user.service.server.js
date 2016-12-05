@@ -1,23 +1,20 @@
-module.exports = function (app, models) {
+module.exports = function (models) {
 
-    app.get('/api/user', currentUser);
-    app.post('/api/user/create', createUser);
-    app.put('/api/user/update', updateUser);
-    app.delete('/api/user/delete', deleteUser);
+    return {
+        createUser: createUser,
+        updateUser: updateUser,
+        deleteUser: deleteUser,
+    };
 
-    function currentUser(req, res) {
-
+    function createUser(user) {
+        return models.user.create(user);
     }
 
-    function createUser(req, res) {
-
+    function updateUser(userId, user) {
+        return models.user.update({_id: userId}, user);
     }
 
-    function updateUser(req, res) {
-
-    }
-
-    function deleteUser(req, res) {
-
+    function deleteUser(userId) {
+        return models.user.remove({_id: userId});
     }
 };

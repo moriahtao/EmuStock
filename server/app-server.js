@@ -1,8 +1,8 @@
 module.exports = function (app, db) {
 
-    var UserModel = require('user.model.server')(db);
-    var StockModel = require('stock.model.server')(db);
-    var CommentModel = require('comment.model.server')(db);
+    var UserModel = require('./models/user.model.server.js')(db);
+    var StockModel = require('./models/stock.model.server.js')(db);
+    var CommentModel = require('./models/comment.model.server.js')(db);
 
     var models = {
         user: UserModel,
@@ -10,7 +10,15 @@ module.exports = function (app, db) {
         comment: CommentModel,
     };
 
-    require("services/user.service.server.js")(app, models);
-    require("services/stock.service.server.js")(app, models);
-    require("services/comment.service.server.js")(app, models);
+    var UserService = require("./services/user.service.server.js")(models);
+    var StockService = require("./services/stock.service.server.js")(models);
+    var CommentService = require("./services/comment.service.server.js")(models);
+
+    var services = {
+        user: UserService,
+        stock: StockService,
+        comment: CommentService,
+    };
+
+    require('./api.server.js')(app, services);
 };

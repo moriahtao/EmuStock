@@ -3,7 +3,7 @@
  */
 (function () {
     angular
-        .module('EmuUser')
+        .module('EmuStock')
         .controller('UserListController', UserListController);
 
     function UserListController($routeParams, UserService) {

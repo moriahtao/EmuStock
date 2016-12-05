@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module('EmuUser')
+        .module('EmuStock')
         .controller('UserDetailController', UserDetailController);
 
     function UserDetailController($routeParams, UserService) {

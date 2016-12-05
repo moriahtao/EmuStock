@@ -3,12 +3,11 @@
         .module('EmuStock')
         .controller('LoginController', LoginController);
 
-    function LoginController($http, $location) {
+    function LoginController($http, $location, SharedService) {
         var vm = this;
+        vm.shared = SharedService;
 
         vm.user = {};
-        vm.username = "";
-        vm.password = "";
 
         // login with session enabled
         vm.login = function() {

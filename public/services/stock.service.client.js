@@ -1,7 +1,7 @@
 (function () {
     angular
         .module('EmuStock')
-        .factory('StockService', StockService, UserService);
+        .factory('StockService', StockService);
 
     function StockService($http) {
         return {

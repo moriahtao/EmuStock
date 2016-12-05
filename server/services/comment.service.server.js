@@ -1,3 +1,3 @@
-module.exports = function (app, models) {
+module.exports = function (models) {
 
 };

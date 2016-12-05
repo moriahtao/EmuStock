@@ -1,6 +1,6 @@
-module.exports = function (app, models) {
+module.exports = function (models) {
 
-    app.get('/api/stock/comments', findCommentsBySymbol);
+
 
     function findCommentsBySymbol(req, res) {
 
