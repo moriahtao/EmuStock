@@ -25,25 +25,23 @@
 })();
 
 
-
-
 /* Proposed usl
-/user/:uid/self -> profle controller
-/user/:uid/other -> user-detail controller
+/self/:s_uid/ -> profle controller
+/self/:s_uid/other/:o_uid -> user-detail controller
+/self/:s_uid/search   -> user-search controller
+/self/:s_uid/stock/search -> stock-searchcontroller
 
-/user/search -> user-search controller
-/user/followed -> user-list controller
-/user/following -> user-list controller
+/self/:s_uid/followers  ||  /self/:s_uid/other/:o_uid／followers -> user-list controller
+/self/:s_uid/followings  ||  /self/:s_uid/other/:o_uid／followings -> user-list controller
 
-/user/:uid/stocks -> stock-list controller
-/stock/:symbol -> stock-detail controller
-/stock/search -> stock-search controller
+/self/:s_uid/stock  ||  /self/:s_uid/other/:o_uid／stock -> stock-list controller
+/self/:s_uid/stock/:symbol  ||  /self/:s_uid/other/:o_uid／stock/:symbol -> stock-detail controller
 
-todo:
-use following url:
-    /self/:self_id/
-    /self/:self_id/other/:other_id/
-    /self/:self_id/stock/:symbol/
 
-    /self/:self_id/other/:other_id/(following/followed/stocks)
- */
+.../comment/ -> comment-list contorller
+.../comment/:cid  -> comment-detail controller
+.../comment/new -> comment-create controller
+.../comment/:cid/edit -> comment-edit controller
+
+
+*/
