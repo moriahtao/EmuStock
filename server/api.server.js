@@ -3,7 +3,7 @@ module.exports = function (app, services) {
     app.post('/api/user/create', createUser);
     app.put('/api/user/update', updateUser);
     app.delete('/api/user/delete', deleteUser);
-    app.get('/api/stock/comments', findCommentsBySymbol);
+    app.get('/api/comments', findCommentsBySymbol);
 
     function createUser(req, res) {
         var user = req.body;
@@ -29,6 +29,15 @@ module.exports = function (app, services) {
         services.user.deleteUser(userId).then(
             () => {
                 res.sendStatus(200);
+            }
+        );
+    }
+
+    function findCommentsBySymbol(req, res) {
+        var symbol = req.query.symbol;
+        services.stock.findCommentsBySymbol(symbol).then(
+            comments => {
+                res.json(comments);
             }
         );
     }
