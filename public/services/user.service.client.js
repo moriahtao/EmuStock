@@ -4,38 +4,50 @@
 (function () {
     angular
         .module('EmuStock')
-        .factory('UserService', UserService)
+        .factory('UserService', UserService);
 
     function UserService($http) {
         return {
-            searchUserByUsername : function(username) {
-                return $http.get("/api/user/?username=" + username);
-            },
+            register: register,
+            searchUserByUsername: searchUserByUsername,
+            findUserById: findUserById,
+            updateUser: updateUser,
+            followUser: followUser,
+            unfollowUser: unfollowUser,
+            followStock: followStock,
+            unfollowStock: unfollowStock,
+        };
 
-            findUserById : function(uid) {
-                return $http.get("/api/user/" + uid);
-            },
+        function register(user) {
+            return $http.post('/api/user/register', user);
+        }
 
-            updateUser : function (uid, user) {
-                return $http.put("/api/user/" + uid, user);
-            },
+        function searchUserByUsername(username) {
+            $http.get("/api/user/?username=" + username);
+        }
 
-            followUser : function(uid, f_uid) {
-                return $http.post("/api/user/" + uid + "/follow/" + f_uid);
-            },
+        function findUserById(uid) {
+            return $http.get("/api/user/" + uid);
+        }
 
-            unfollowUser : function(uid, f_uid) {
-                return $http.delete("/api/user/" + uid + "/follow/" + f_uid);
-            },
+        function updateUser(uid, user) {
+            return $http.put("/api/user/" + uid, user);
+        }
 
-            followStock : function(uid, symbol) {
-                return $http.post("/api/user/" + uid + "/stock/" + symbol);
-            },
+        function followUser(uid, f_uid) {
+            return $http.post("/api/user/" + uid + "/follow/" + f_uid);
+        }
 
-            unfollowStock : function(uid, symbol) {
-                return $http.delete("/api/user/" + uid + "/stock/" + symbol);
-            }
+        function unfollowUser(uid, f_uid) {
+            return $http.delete("/api/user/" + uid + "/follow/" + f_uid);
+        }
+
+        function followStock(uid, symbol) {
+            return $http.post("/api/user/" + uid + "/stock/" + symbol);
+        }
+
+        function unfollowStock(uid, symbol) {
+            return $http.delete("/api/user/" + uid + "/stock/" + symbol);
         }
     }
-
 })();
