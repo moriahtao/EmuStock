@@ -23,7 +23,7 @@
                 );
         };
 
-        // register with sesson
+        // register with session
         vm.register = function() {
             return $http.post("/api/register", vm.user)
                 .then(
