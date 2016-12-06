@@ -12,26 +12,24 @@
         .module('EmuStock')
         .controller('CommentListController', CommentListController);
 
-    function CommentListController($routeParams, CommentService) {
+    function CommentListController($routeParams, UserService, StockService) {
         var vm = this;
         vm.comments = null;
 
-        if ($routeParams.params.uid != null) {
+        if ($routeParams.params.uid != undefined) {
             vm.uid = $routeParams.params.uid;
-            CommentService.getCommentByUser(vm.uid)
-                .then(
-                    function(res) {
-                        vm.comments = res.data;
-                    }
-                );
-        } else if ($routeParams.params.symbol != null) {
+            UserService.getCommentsByUser(vm.uid).then(
+                function (res) {
+                    vm.comments = res.data;
+                }
+            );
+        } else if ($routeParams.params.symbol != undefined) {
             vm.symbol = $routeParams.params.symbol;
-            CommentService.getCommentByStock(vm.symbol)
-                .then(
-                    function(res) {
-                        vm.comments = res.data;
-                    }
-                );
+            StockService.getCommentsByStock(vm.symbol).then(
+                function (res) {
+                    vm.comments = res.data;
+                }
+            );
         }
 
 

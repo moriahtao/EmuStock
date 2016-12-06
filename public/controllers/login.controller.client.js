@@ -3,23 +3,21 @@
         .module('EmuStock')
         .controller('LoginController', LoginController);
 
-    function LoginController($http, $location, SharedService) {
+    function LoginController($location, SharedService, UserService) {
         var vm = this;
         vm.shared = SharedService;
 
         vm.user = {};
 
         // login with session enabled
-        vm.login = function() {
-            $http.post("/api/login", vm.user)
-                .then(
-                    function(res) {
-                        $location.path("/profile/" + res.data._id);
-                    },
-                    function(res) {
-                        alert("Invalid username password pair");
-                    }
-                );
+        vm.login = function () {
+            UserService.login(vm.user).then(
+                () => {
+                    console.log("login succeeded");
+                    $location.url(vm.shared.getRoute('profile'));
+                },
+                () => console.warn("Invalid username password pair")
+            );
         };
     }
 })();

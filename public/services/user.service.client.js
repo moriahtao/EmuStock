@@ -11,11 +11,15 @@
             register: register,
             searchUserByUsername: searchUserByUsername,
             findUserById: findUserById,
+            currentUser: currentUser,
             updateUser: updateUser,
             followUser: followUser,
             unfollowUser: unfollowUser,
             followStock: followStock,
             unfollowStock: unfollowStock,
+            login: login,
+            logout: logout,
+            getCommentsByUser: getCommentsByUser,
         };
 
         function register(user) {
@@ -30,8 +34,12 @@
             return $http.get("/api/user/" + uid);
         }
 
-        function updateUser(uid, user) {
-            return $http.put("/api/user/" + uid, user);
+        function currentUser() {
+            return $http.get("api/user/current");
+        }
+
+        function updateUser(user) {
+            return $http.put("/api/user/update", user);
         }
 
         function followUser(uid, f_uid) {
@@ -48,6 +56,18 @@
 
         function unfollowStock(uid, symbol) {
             return $http.delete("/api/user/" + uid + "/stock/" + symbol);
+        }
+
+        function login(user) {
+            return $http.post("/api/user/login", user);
+        }
+
+        function logout() {
+            return $http.post("/api/user/logout");
+        }
+
+        function getCommentsByUser(userId) {
+            return $http.get(`/api/user/comments/${userId}`);
         }
     }
 })();

@@ -19,10 +19,10 @@
             CommentService.updateComment(vm.comment_id, vm.comment)
                 .then(
                     function() {
-                        alert("update success");
+                        console.log("update success");
                     },
                     function () {
-                        alert("update failed");
+                        console.warn("update failed");
                     }
                 );
         }

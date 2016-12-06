@@ -3,6 +3,19 @@ module.exports = function (app, services) {
     var LocalStrategy = require('passport-local').Strategy;
     var bcrypt = require("bcrypt-nodejs");
 
+
+    // server api routes
+    app.get('/api/user/loggedin', loggedin);
+    app.post('/api/user/register', register);
+    app.post('/api/user/login', passport.authenticate('local'), currentUser);
+    app.get('/api/user/current', currentUser);
+    app.put('/api/user/update', auth, updateUser);
+    app.post('/api/user/logout', auth, logout);
+    app.delete('/api/user/delete', auth, deleteUser);
+    app.get('/api/user/:userId/comments', auth, findCommentsByUser);
+    app.get('/api/stock/:symbol/comments', auth, findCommentsBySymbol);
+
+
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
@@ -12,10 +25,10 @@ module.exports = function (app, services) {
 
     function deserializeUser(user, done) {
         services.user.findUserById(user._id).then(
-            function (user) {
+            user => {
                 done(null, user);
             },
-            function (err) {
+            err => {
                 done(err, null);
             }
         );
@@ -32,24 +45,15 @@ module.exports = function (app, services) {
                     }
                 },
                 err => {
-                    if (err) {
-                        return done(err);
-                    }
+                    return done(err);
                 }
             );
         }
     ));
 
-    // server api routes
-    app.post('/api/user/register', register);
-    app.post('/api/user/login', passport.authenticate('local', {
-        successRedirect: '/#profile',
-        failureRedirect: '/#login',
-    }));
-    app.put('/api/user/update', auth, updateUser);
-    app.delete('/api/user/delete', auth, deleteUser);
-    app.get('/api/comments', auth, findCommentsBySymbol);
-
+    function loggedin(req, res) {
+        res.json(req.isAuthenticated() ? req.user : false);
+    }
 
     function auth(req, res, next) {
         if (req.isAuthenticated()) {
@@ -60,6 +64,7 @@ module.exports = function (app, services) {
     }
 
     function register(req, res) {
+        // TODO: prevent duplicate usernames
         var user = req.body;
         user.password = bcrypt.hashSync(user.password);
         services.user.createUser(user).then(
@@ -69,8 +74,12 @@ module.exports = function (app, services) {
         );
     }
 
+    function currentUser(req, res) {
+        res.json(req.user);
+    }
+
     function updateUser(req, res) {
-        var userId = req.params.userId;
+        var userId = req.user._id;
         var user = req.body;
         services.user.updateUser(userId, user).then(
             () => {
@@ -79,21 +88,29 @@ module.exports = function (app, services) {
         );
     }
 
+    function logout(req, res) {
+        req.logout();
+        res.sendStatus(200);
+    }
+
     function deleteUser(req, res) {
         var userId = req.params.userId;
         services.user.deleteUser(userId).then(
-            () => {
-                res.sendStatus(200);
-            }
+            () => res.sendStatus(200)
+        );
+    }
+
+    function findCommentsByUser(req, res) {
+        var userId = req.params.userId;
+        services.user.findCommentsByUser(userId).then(
+            comments => res.json(comments)
         );
     }
 
     function findCommentsBySymbol(req, res) {
         var symbol = req.query.symbol;
         services.stock.findCommentsBySymbol(symbol).then(
-            comments => {
-                res.json(comments);
-            }
+            comments => res.json(comments)
         );
     }
 };

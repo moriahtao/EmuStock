@@ -6,6 +6,7 @@ module.exports = function (models) {
         createUser: createUser,
         updateUser: updateUser,
         deleteUser: deleteUser,
+        findCommentsByUser: findCommentsByUser,
     };
 
     function findUserById(userId) {
@@ -26,5 +27,9 @@ module.exports = function (models) {
 
     function deleteUser(userId) {
         return models.user.remove({_id: userId});
+    }
+
+    function findCommentsByUser(userId) {
+        return models.user.findOne({_id: userId}).populate('comments');
     }
 };

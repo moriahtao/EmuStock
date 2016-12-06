@@ -16,11 +16,11 @@
             return UserService.register(vm.user)
                 .then(
                     function (res) {
-                        alert("Register success");
+                        console.log("Register success");
                         $location.url(vm.shared.getRoute('profile'));
                     },
-                    function (res) {
-                        alert(res.data);
+                    function (err) {
+                        console.warn(err.data);
                     }
                 );
         };

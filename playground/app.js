@@ -80,7 +80,6 @@
                             vm.chart.Elements[0].DataSeries.close.values[i],
                         ]);
                     }
-                    console.log('xxx', points)
                     $('#stock-chart').highcharts('StockChart', {
 
                         rangeSelector: {

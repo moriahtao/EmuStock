@@ -24,7 +24,7 @@
             timeline: {
                 route: '/timeline',
                 view: 'views/timeline.view.client.html',
-                controller: 'TimelineController',
+                controller: 'CommentListController',
             },
             stocks: {
                 route: '/stocks',

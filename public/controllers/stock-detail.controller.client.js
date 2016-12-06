@@ -43,10 +43,10 @@
             UserService.followStock(vm.uid, vm.stock.symbol)
                 .then(
                     function() {
-                        alert("follow success.");
+                        console.log("follow success.");
                     },
                     function() {
-                        alert("follow failed. try again later");
+                        console.warn("follow failed. try again later");
                     }
                 );
         };
@@ -55,7 +55,7 @@
             UserService.unfollowStock(vm.uid, vm.stock.symbol)
                 .then(
                     function() {
-                        alert("unfollow success.");
+                        console.log("unfollow success.");
                         if (vm.stocks) {
                             vm.stocks = vm.stocks.filter(function(x){return x.symbol != vm.stock.symbol;});
                         }

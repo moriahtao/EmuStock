@@ -38,12 +38,12 @@
             UserService.followUser(vm.self_uid, vm.other_uid)
                 .then(
                     function() {
-                        alert("follow success.");
+                        console.log("follow success.");
                         vm.other.followed = true;
                     },
                     function() {
                         vm.other.followed = false;
-                        alert("follow failed. try again later");
+                        console.warn("follow failed. try again later");
                     }
                 );
         };
@@ -52,7 +52,7 @@
             UserService.unfollowUser(vm.self_uid, vm.other_uid)
                 .then(
                     function() {
-                        alert("unfollow success.");
+                        console.log("unfollow success.");
                         vm.other.followed = false;
                     }
                 );
