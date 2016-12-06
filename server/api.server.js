@@ -3,6 +3,24 @@ module.exports = function (app, services) {
     var LocalStrategy = require('passport-local').Strategy;
     var bcrypt = require("bcrypt-nodejs");
 
+    passport.serializeUser(serializeUser);
+    passport.deserializeUser(deserializeUser);
+
+    function serializeUser(user, done) {
+        done(null, user);
+    }
+
+    function deserializeUser(user, done) {
+        services.user.findUserById(user._id).then(
+            function (user) {
+                done(null, user);
+            },
+            function (err) {
+                done(err, null);
+            }
+        );
+    }
+
     passport.use(new LocalStrategy(
         function (username, password, done) {
             services.user.findUserByUsername(username).then(
@@ -22,6 +40,7 @@ module.exports = function (app, services) {
         }
     ));
 
+    // server api routes
     app.post('/api/user/register', register);
     app.post('/api/user/login', passport.authenticate('local', {
         successRedirect: '/#profile',
@@ -45,7 +64,7 @@ module.exports = function (app, services) {
         user.password = bcrypt.hashSync(user.password);
         services.user.createUser(user).then(
             user => {
-                res.json(user);
+                req.login(user, err => res.json(user));
             }
         );
     }

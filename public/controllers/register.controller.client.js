@@ -6,19 +6,20 @@
         .module('EmuStock')
         .controller('RegisterController', RegisterController);
 
-    function RegisterController($http, $location) {
+    function RegisterController($location, SharedService, UserService) {
         var vm = this;
+        vm.shared = SharedService;
 
         vm.user = {};
 
-        vm.register = function() {
-            return $http.post("/api/user/register", vm.user)
+        vm.register = function () {
+            return UserService.register(vm.user)
                 .then(
-                    function(res) {
+                    function (res) {
                         alert("Register success");
-                        $location.path("/profile/" + res.data._id);
+                        $location.url(vm.shared.getRoute('profile'));
                     },
-                    function(res) {
+                    function (res) {
                         alert(res.data);
                     }
                 );

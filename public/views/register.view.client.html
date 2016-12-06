@@ -15,7 +15,7 @@
            class="form-control"
            placeholder="Verify Password"/>
     <a class="btn btn-primary btn-block"
-       href="#{{vm.shared.getRoute('register')}}">
+       ng-click="vm.register()">
        Register</a>
     <a class="btn btn-danger btn-block"
        href="#{{vm.shared.getRoute('login')}}"
