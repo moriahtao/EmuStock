@@ -27,10 +27,10 @@
                     <a href="#{{vm.shared.getRoute('mystock')}}">My Stock</a>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Social <span class="caret"></span></a>
+                    <a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Social <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#{{vm.shared.getRoute('follower')}}">My follower</a></li>
-                        <li><a href="#{{vm.shared.getRoute('following')}}">My following</a></li>
+                        <li><a href="#">follower</a></li>
+                        <li><a href="#">following</a></li>
                     </ul>
                 </li>
                 <li class="page-scroll">
@@ -46,10 +46,10 @@
 <div class="container top">
 
     <div ng-repeat="comment in vm.comments">
-        <h2>{{comment.stock}}</h2>
+        <h2>{{comment.stockName}}</h2>
         <blockquote>
             <p>{{comment.text}}</p>
-            <small class="text-muted">{{comment.createDate}}</small>
+            <small>{{comment.userName}} <cite title="Source Title" class="text-muted">{{comment.createDate}}</cite></small>
         </blockquote>
     </div>
 </div>

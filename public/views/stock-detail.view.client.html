@@ -69,6 +69,24 @@
         </tr>
         </tfoot>
     </table>
+    <!--TO DO: DETAIL-->
     <div>{{vm.details}}</div>
+
+   <!--CHART-->
     <div id="stock-chart"></div>
+
+
+    <!--COMMENTS-->
+    <ul class="breadcrumb">
+        <li class="active">Comments</li>
+    </ul>
+    <div ng-repeat="comment in vm.comments" class="panel panel-default">
+        <div ng-bind-html="vm.checkSafeHtml(comment.text)" class="panel-body">
+            <!--Basic panel-->
+        </div>
+    </div>
+    <!--<div ng-repeat="comment in vm.comments">
+        <div ng-bind-html="vm.checkSafeHtml(comment.text)"></div>
+    </div>-->
+
 </div>

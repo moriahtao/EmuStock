@@ -43,18 +43,17 @@
 <div class="container top">
 
     <h3>Discover friends</h3>
-    <div ng-repeat="user in vm.users">
-        <p>
-            {{user.name}}
-        </p>
-        <a ng-click="vm.follow(user)"
-           class="btn btn-success btn-block">
-            <span class="fa fa-heart"></span>follow</a>
+        <ul class="list-group">
+            <li ng-repeat="user in vm.users" class="list-group-item">
+                <a href="#">
+                    {{user.name}}
+                </a>
+                <!--use modal to show the chart of a stock-->
+                <!-- Trigger the modal with a glyphicon -->
+                <!-- <span class="glyphicon glyphicon-eye-open pull-right" data-toggle="modal" data-target="#myModal"></span>-->
+            </li>
+        </ul>
 
-        <a ng-click="vm.unfollow(user)"
-           class="btn btn-danger btn-block">
-            <span class="fa fa-trash"></span>unfollow</a>
-    </div>
 
 </div>
 
