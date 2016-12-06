@@ -15,6 +15,7 @@
                 route:'/register',
                 view: 'views/register.view.client.html',
                 controller: 'RegisterController',
+                isPublic: true
             },
             profile: {
                 route: '/profile',
