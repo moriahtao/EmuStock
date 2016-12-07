@@ -51,11 +51,8 @@
  /self/:s_uid/stock  ||  /self/:s_uid/other/:o_uid／stock -> stock-list controller
  /self/:s_uid/stock/:symbol  ||  /self/:s_uid/other/:o_uid／stock/:symbol -> stock-detail controller
 
-
  .../comment/ -> comment-list contorller
  .../comment/:cid  -> comment-detail controller
  .../comment/new -> comment-create controller
  .../comment/:cid/edit -> comment-edit controller
-
-
  */

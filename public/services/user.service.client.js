@@ -22,6 +22,14 @@
             getCommentsByUser: getCommentsByUser,
         };
 
+        function login(user) {
+            return $http.post("/api/user/login", user);
+        }
+
+        function logout() {
+            return $http.post("/api/user/logout");
+        }
+
         function register(user) {
             return $http.post('/api/user/register', user);
         }
@@ -56,14 +64,6 @@
 
         function unfollowStock(uid, symbol) {
             return $http.delete("/api/user/" + uid + "/stock/" + symbol);
-        }
-
-        function login(user) {
-            return $http.post("/api/user/login", user);
-        }
-
-        function logout() {
-            return $http.post("/api/user/logout");
         }
 
         function getCommentsByUser(userId) {
