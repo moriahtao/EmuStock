@@ -67,7 +67,7 @@
         }
 
         function getTimelineByUser(userId) {
-            return $http.get(`/api/user/comments/${userId}`);
+            return $http.get(`/api/user/${userId}/timline/`);
         }
     }
 })();

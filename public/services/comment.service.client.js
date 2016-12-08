@@ -44,7 +44,7 @@
         }
 
         function findCommentByUserId(uid) {
-            $http.get("/api/comment/?uid=" + uid)
+            $http.get("/api/comment/uid/" + uid)
                 .then(
                     function (res) {
                         return res.data;
@@ -53,7 +53,7 @@
         }
 
         function findCommentByStock(symbol) {
-            $http.get("/api/comment/?stock=" + symbol)
+            $http.get("/api/comment/stock/" + symbol)
                 .then(
                     function (res) {
                         return res.data;
