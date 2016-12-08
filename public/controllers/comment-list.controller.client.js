@@ -27,7 +27,7 @@
             createDate: '2016-08-08',
         }];
 
-        if ($location.path().include("timeline")) {
+        if ($location.path().includes("timeline")) {
             CommentService.getTimelineByUserId($routeParams.s_uid)
                 .then(
                     function (res) {
