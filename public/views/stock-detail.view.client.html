@@ -25,7 +25,7 @@
     <!--TODO: DETAIL-->
     <div>{{vm.details}}</div>
 
-   <!--CHART-->
+    <!--CHART-->
     <div id="stock-chart"></div>
 
 
@@ -33,44 +33,40 @@
     <ul class="breadcrumb">
         <li class="active">Comments</li>
     </ul>
-    <div ng-repeat="comment in vm.comments" class="panel panel-default">
-        <div ng-bind-html="vm.checkSafeHtml(comment.text)" class="panel-body">
-            <!--Basic panel-->
-        </div>
+    <!--comment list-->
+    <div ng-repeat="comment in vm.comments">
+        <h2>{{comment.title}}</h2>
+        <p>{{comment.text}}</p>
+        <small>{{comment.user}} <cite title="Source Title" class="text-muted">post on {{comment.createdAt}}</cite>
+        </small>
     </div>
-
-        <form class="form-horizontal">
-            <fieldset>
-                <legend>Comment</legend>
-                <div class="form-group">
-                    <label for="website-name">Name</label>
-                    <span ng-show="model.myForm.name.$invalid">
-                <h6>{{model.alert}}</h6>
-            </span>
-                    <input ng-model="model.website.name"
-                           type="text"
-                           name="name"
-                           required
-                           class="form-control"
-                           id="website-name"
-                           placeholder="Name" required>
-                </div>
-        <div class="form-group">
-            <textarea ng-model="vm.mycomment.text"
-                      type="text"
-                      name="text"
-                      rows="5"
-                      class="form-control"
-                      id="stock-comment"
-                      placeholder="Post your comment here"></textarea>
-        </div>
-                <span class="help-block">Add your comment to this stock</span>
-            </fieldset>
-     </form>
+    <!--edit my comment-->
+    <form class="form-horizontal">
+        <fieldset>
+            <legend>Leave a comment</legend>
+            <div class="form-group">
+                <label for="comment-title">Title</label>
+                <!--title for the comment-->
+                <input ng-model="vm.myComment.title"
+                       type="text"
+                       name="title"
+                       class="form-control"
+                       id="comment-title"
+                       placeholder="Comment title">
+            </div>
+            <div class="form-group">
+                <!--text for the comment-->
+                <textarea ng-model="vm.myComment.text"
+                          type="text"
+                          name="text"
+                          rows="5"
+                          class="form-control"
+                          id="comment-text"
+                          placeholder="Post your comment here"></textarea>
+            </div>
+            <span class="help-block">Add your comment to this stock</span>
+        </fieldset>
+    </form>
     <a class="btn btn-primary  btn-block"
-       ng-click="vm.createComment(vm.mycomment)">Delete</a>
-    <!--<div ng-repeat="comment in vm.comments">
-        <div ng-bind-html="vm.checkSafeHtml(comment.text)"></div>
-    </div>-->
-
+       ng-click="vm.createComment(vm.myComment)">Delete</a>
 </div>

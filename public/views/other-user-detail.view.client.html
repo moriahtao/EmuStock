@@ -4,7 +4,7 @@
     <div class="jumbotron">
         <h3>vm.user.name</h3>
 
-       <!--show this user's list of stocks-->
+        <!--show this user's list of stocks-->
         <ul class="list-group">
             <li ng-repeat="stock in vm.stocks" class="list-group-item">
                 <a href="{{vm.shared.getRoute('self_stock_detail')}}">
@@ -13,15 +13,15 @@
             </li>
         </ul>
 
-       <!--show the button to follow/unfollow this user-->
+        <!--show the button to follow/unfollow this user-->
         <p>
-            <a ng-if="vm.unfollowed"
+            <a ng-if="!vm.other.followed"
                ng-click="vm.follow()"
                class="btn btn-success btn-block">
                 <span class="fa fa fa-heart"></span>Follow
             </a>
 
-            <a ng-if="vm.followed"
+            <a ng-if="vm.other.followed"
                ng-click="vm.unfollow()"
                class="btn btn-danger btn-block">
                 <span class="fa fa fa-trash"></span>Unfollow
