@@ -40,6 +40,8 @@
                 }
             );
 
+
+
         vm.follow = function() {
             UserService.followStock(vm.uid, vm.stock.symbol)
                 .then(
@@ -63,6 +65,15 @@
                     }
                 );
         };
+
+        vm.createComment = function() {
+            CommentService.createComment(vm.comment)
+                .then(
+                    function (res) {
+
+                    }
+                );
+        }
     }
 })();
 
