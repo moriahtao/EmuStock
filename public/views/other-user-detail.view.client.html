@@ -1,20 +1,33 @@
 <nav-bar></nav-bar>
-<div class="container top">
 
-<div class="jumbotron">
-    <h3>vm.user.name</h3>
-    <label>Follow me: <input type="checkbox" ng-model="vm.checked" ng-init="vm.checked" /></label><br/>
-    Show when checked:
-    <span ng-if="checked" class="animate-if">
-  This is removed when the checkbox is unchecked.
-</span>
-    <ul class="list-group">
-        <li ng-repeat="stock in vm.stocks" class="list-group-item">
-            <a href="{{vm.shared.getRoute('self_stock_detail')}}">
-                {{stock.name}}
+<div class="container top">
+    <div class="jumbotron">
+        <h3>vm.user.name</h3>
+
+       <!--show this user's list of stocks-->
+        <ul class="list-group">
+            <li ng-repeat="stock in vm.stocks" class="list-group-item">
+                <a href="{{vm.shared.getRoute('self_stock_detail')}}">
+                    {{stock.name}}
+                </a>
+            </li>
+        </ul>
+
+       <!--show the button to follow/unfollow this user-->
+        <p>
+            <a ng-if="vm.unfollowed"
+               ng-click="vm.follow()"
+               class="btn btn-success btn-block">
+                <span class="fa fa fa-heart"></span>Follow
             </a>
-        </li>
-    </ul>
-    <p><a class="btn btn-primary btn-lg">Learn more</a></p>
-</div>
+
+            <a ng-if="vm.followed"
+               ng-click="vm.unfollow()"
+               class="btn btn-danger btn-block">
+                <span class="fa fa fa-trash"></span>Unfollow
+            </a>
+        </p>
+    </div>
+
+
 </div>
