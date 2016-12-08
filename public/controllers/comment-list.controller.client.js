@@ -12,7 +12,7 @@
         .module('EmuStock')
         .controller('CommentListController', CommentListController);
 
-    function CommentListController($routeParams, SharedService, UserService, StockService) {
+    function CommentListController($routeParams, $location, SharedService, CommentService) {
         var vm = this;
         vm.shared = SharedService;
         vm.comments = [{
@@ -27,22 +27,33 @@
             createDate: '2016-08-08',
         }];
 
-        if ($routeParams.s_uid !== undefined) {
-            var uid = $routeParams.s_uid;
-            UserService.getCommentsByUser(uid).then(
+        if ($location.path.include("timeline")) {
+            CommentService.getTimelineByUserId($routeParams.s_uid)
+                .then(
+                    function (res) {
+                        vm.comments = res.data;
+                    }
+                );
+        } else if ($routeParams.symbol !== undefined) {
+            var symbol = $routeParams.symbol;
+            CommentService.findCommentByStock(symbol).then(
                 function (res) {
                     vm.comments = res.data;
                 }
             );
-        } else if ($routeParams.symbol !== undefined) {
-            var symbol = $routeParams.symbol;
-            StockService.getCommentsByStock(symbol).then(
+        } else {
+            var uid;
+            if ($routeParams.o_uid !== undefined) {
+                uid = $routeParams.o_uid;
+            } else if ($routeParams.s_uid !== undefined) {
+                uid = $routeParams.s_uid;
+            }
+
+            CommentService.findCommentByUserId(uid).then(
                 function (res) {
                     vm.comments = res.data;
                 }
             );
         }
-
-
     }
 })();
