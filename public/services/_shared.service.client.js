@@ -12,7 +12,7 @@
                 isPublic: true
             },
             register: {
-                route:'/register',
+                route: '/register',
                 view: 'views/register.view.client.html',
                 controller: 'RegisterController',
                 isPublic: true
@@ -34,7 +34,7 @@
                 view: 'views/following.view.client.html',
                 controller: 'UserListController'
             },
-            self_follower:{
+            self_follower: {
                 route: '/self/:s_uid/follower ',
                 view: 'views/follower.view.client.html',
                 controller: 'UserListController'
@@ -98,9 +98,9 @@
          * note: priorDict is used to map keys prior to $routeParams
          * */
         function getRoute(routeKey, priorDict) {
-            return maps[routeKey].route.
-                // match ":" plus non ("\" or "/" )one or more time
-                replace(/:([^\/]+)/g, function (_, key) {
+            return maps[routeKey].route
+            // match ":" plus non ("\" or "/" )one or more time
+                .replace(/:([^\/]+)/g, function (_, key) {
                     return priorDict && key in priorDict ?
                         priorDict[key] : $routeParams[key];
                 });
