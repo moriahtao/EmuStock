@@ -12,7 +12,7 @@
         .module('EmuStock')
         .controller('CommentListController', CommentListController);
 
-    function CommentListController($routeParams, SharedService, CommentService) {
+    function CommentListController($routeParams, $location, SharedService, CommentService) {
         var vm = this;
         vm.shared = SharedService;
         vm.comments = [{
@@ -27,8 +27,14 @@
             createDate: '2016-08-08',
         }];
 
-
-        if ($routeParams.symbol !== undefined) {
+        if ($location.path.include("timeline")) {
+            CommentService.getTimelineByUserId($routeParams.s_uid)
+                .then(
+                    function (res) {
+                        vm.comments = res.data;
+                    }
+                );
+        } else if ($routeParams.symbol !== undefined) {
             var symbol = $routeParams.symbol;
             CommentService.findCommentByStock(symbol).then(
                 function (res) {
