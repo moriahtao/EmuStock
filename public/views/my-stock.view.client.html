@@ -3,7 +3,7 @@
 <div class="container top">
     <ul class="list-group">
         <li ng-repeat="stock in vm.stocks" class="list-group-item">
-            <a href="#">
+            <a href="{{vm.shared.getRoute('self_stock_detail')}}">
                 {{stock.name}}
             </a>
             <!--use modal to show the chart of a stock-->
