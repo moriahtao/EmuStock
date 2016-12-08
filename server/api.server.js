@@ -15,6 +15,7 @@ module.exports = function (app, services) {
     app.delete('/api/user/delete', auth, deleteUser);
     app.get('/api/user/:userId/comments', auth, findCommentsByUser);
     app.get('/api/stock/:symbol/comments', auth, findCommentsBySymbol);
+    app.post('/api/comment', auth, createComment);
 
 
     passport.serializeUser(serializeUser);
@@ -121,6 +122,13 @@ module.exports = function (app, services) {
         var symbol = req.query.symbol;
         services.stock.findCommentsBySymbol(symbol).then(
             comments => res.json(comments)
+        );
+    }
+
+    function createComment(req, res) {
+        var comment = req.body;
+        services.comment.createComment(comment).then(
+            comment => res.json(comment)
         );
     }
 };
