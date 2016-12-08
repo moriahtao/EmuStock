@@ -10,6 +10,7 @@
         vm.uid = $routeParams.uid;
         vm.stock = {symbol : $routeParams.symbol, followed : false};
         vm.term = "stock name";
+        vm.comment = {};
 
         // get user profile to know whether this stock is followed
         UserService.findUserById(vm.uid)
@@ -40,6 +41,8 @@
                 }
             );
 
+
+
         vm.follow = function() {
             UserService.followStock(vm.uid, vm.stock.symbol)
                 .then(
@@ -63,6 +66,16 @@
                     }
                 );
         };
+
+        vm.createComment = function() {
+            CommentService.createComment(vm.comment)
+                .then(
+                    function (res) {
+                        // todo : add comment to current comemnt list
+                        // or refresh page
+                    }
+                );
+        }
     }
 })();
 
