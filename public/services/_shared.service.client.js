@@ -75,14 +75,29 @@
             // comments
             timeline: {
                 route: '/self/:s_uid/timeline',
-                view: 'views/timeline.view.client.html',
+                view: 'views/comment-list.view.client.html',
                 controller: 'CommentListController',
             },
-            comment_details: {
-                route: '/comment/:cid',
-                view: 'views/timeline.view.client.html',
-                controller: 'CommentDetailController',
-            }
+            self_comments: {
+                route: '/self/:s_uid/comments',
+                view: 'views/comment-list.view.client.html',
+                controller: 'CommentListController',
+            },
+            other_comments: {
+                route: '/self/:s_uid/other/:o_uid/comments',
+                view: 'views/comment-list.view.client.html',
+                controller: 'CommentListController',
+            },
+            stock_comments: {
+                route: '/self/:s_uid/stock/:symbol/comments',
+                view: 'views/comment-list.view.client.html',
+                controller: 'CommentListController',
+            },
+            // comment_details: {
+            //     route: '/comment/:cid',
+            //     view: 'views/comment-list.view.client.html',
+            //     controller: 'CommentDetailController',
+            // }
         };
 
         return {
