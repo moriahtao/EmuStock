@@ -77,11 +77,11 @@ hr.star-primary:after {
 header {
   text-align: center;
 
-  background: #4e5d6c;
   color: white;
   opacity: 0.9;
   background-position: center;
-  background: url("../img/header.jpg");
+  /*TODO: find a background image*/
+  /*background: url("../img/header.jpg");*/
 
   position:fixed;
   width: 100%;

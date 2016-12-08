@@ -12,9 +12,10 @@
         // login with session enabled
         vm.login = function () {
             UserService.login(vm.user).then(
-                () => {
+                (res) => {
                     console.log("login succeeded");
-                    $location.url(vm.shared.getRoute('profile'));
+                    var user = res.data;
+                    $location.url(vm.shared.getRoute('profile', {s_uid: user._id}));
                 },
                 () => console.warn("Invalid username password pair")
             );

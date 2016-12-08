@@ -3,8 +3,9 @@
         .module('EmuStock')
         .controller('CommentCreateController', CommentCreateController);
 
-    function CommentCreateController($routeParams, CommentService) {
+    function CommentCreateController($routeParams, SharedService, CommentService) {
         var vm = this;
+        vm.shared = SharedService;
         vm.comment = null;
 
         function create() {

@@ -8,6 +8,7 @@ module.exports = function (app, services) {
     app.get('/api/user/loggedin', loggedin);
     app.post('/api/user/register', register);
     app.post('/api/user/login', passport.authenticate('local'), currentUser);
+    app.get('/api/user/:uid', findUserById);
     app.get('/api/user/current', currentUser);
     app.put('/api/user/update', auth, updateUser);
     app.post('/api/user/logout', auth, logout);
@@ -70,6 +71,15 @@ module.exports = function (app, services) {
         services.user.createUser(user).then(
             user => {
                 req.login(user, err => res.json(user));
+            }
+        );
+    }
+
+    function findUserById(req, res) {
+        var uid = req.params.uid;
+        services.user.findUserById(uid).then(
+            user => {
+                res.json(user);
             }
         );
     }

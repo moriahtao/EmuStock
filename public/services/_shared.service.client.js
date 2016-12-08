@@ -18,7 +18,7 @@
                 isPublic: true
             },
             profile: {
-                route: '/self',
+                route: '/self/:s_uid',
                 view: 'views/profile.view.client.html',
                 controller: 'ProfileController',
             },
@@ -30,12 +30,12 @@
 
             // users
             self_following: {
-                route: '/self/:s_uid/following ',
+                route: '/self/:s_uid/following',
                 view: 'views/following.view.client.html',
                 controller: 'UserListController'
             },
             self_follower: {
-                route: '/self/:s_uid/follower ',
+                route: '/self/:s_uid/follower',
                 view: 'views/follower.view.client.html',
                 controller: 'UserListController'
             },
@@ -74,12 +74,12 @@
 
             // comments
             timeline: {
-                route: 'self/:s_uid/timeline',
+                route: '/self/:s_uid/timeline',
                 view: 'views/timeline.view.client.html',
                 controller: 'CommentListController',
             },
             comment_details: {
-                route: '/commnet/:cid',
+                route: '/comment/:cid',
                 view: 'views/timeline.view.client.html',
                 controller: 'CommentDetailController',
             }

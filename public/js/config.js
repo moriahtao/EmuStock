@@ -26,13 +26,15 @@
                     templateUrl: item.view,
                     controller: item.controller,
                     controllerAs: 'vm',
-                    resolve: item.isPublic ? {} : {loggedin: checkLoggedin},
+                    // TODO: uncomment this
+                    // resolve: item.isPublic ? {} : {loggedin: checkLoggedin},
                 });
         });
 
-        $routeProvider
-            .otherwise({
-                redirectTo: maps.login.route,
-            });
+        // TODO: uncomment this
+        // $routeProvider
+        //     .otherwise({
+        //         redirectTo: maps.login.route,
+        //     });
     }
 })();

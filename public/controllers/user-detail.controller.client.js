@@ -3,8 +3,9 @@
         .module('EmuStock')
         .controller('UserDetailController', UserDetailController);
 
-    function UserDetailController($routeParams, UserService) {
+    function UserDetailController($routeParams, SharedService, UserService) {
         var vm = this;
+        vm.shared = SharedService;
 
         vm.self_uid = $routeParams.self_uid;
         vm.other_uid = $routeParams.other_uid;

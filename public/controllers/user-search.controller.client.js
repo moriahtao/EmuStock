@@ -6,8 +6,9 @@
         .module('EmuStock')
         .controller('UserListController', UserListController);
 
-    function UserListController($routeParams, UserService) {
+    function UserListController($routeParams, SharedService, UserService) {
         var vm = this;
+        vm.shared = SharedService;
 
         vm.uid = $routeParams.uid;
 

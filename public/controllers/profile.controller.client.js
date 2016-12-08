@@ -9,32 +9,21 @@
 
         vm.user = {};
 
-        if ($routeParams.uid === undefined) {
-            UserService.currentUser().then(
-                function (res) {
-                    vm.user = res.data;
-                },
-                function (err) {
-                    console.warn("error fetch user profile: " + err);
-                }
-            );
-        } else {
-            UserService.findUserById($routeParams.uid).then(
-                function (res) {
-                    vm.user = res.data;
-                },
-                function (err) {
-                    console.warn("error fetch user profile: " + err);
-                }
-            );
-        }
+        UserService.findUserById($routeParams.s_uid).then(
+            function (res) {
+                vm.user = res.data;
+            },
+            function (err) {
+                console.warn("error fetch user profile: " + err);
+            }
+        );
 
         vm.update = function () {
             UserService.updateUser(vm.user).then(
                 () => console.log("update succeeded"),
                 () => console.warn("update failed, please try again later")
             )
-        }
+        };
 
         vm.logout = function () {
             UserService.logout().then(

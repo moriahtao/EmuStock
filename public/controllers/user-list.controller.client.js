@@ -12,12 +12,14 @@
         .module('EmuStock')
         .controller('UserListController', UserListController);
 
-    function UserListController($location, $routeParams, UserService) {
+    function UserListController($location, $routeParams, SharedService, UserService) {
         var vm = this;
-        var path = $location.path();
+        vm.shared = SharedService;
+
         vm.uid = $routeParams.uid;
         vm.users = [];
 
+        var path = $location.path();
         // initialization : get user profile to know whether this stock is followed
         UserService.findUserById(vm.uid)
             .then(
