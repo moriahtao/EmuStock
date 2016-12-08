@@ -66,7 +66,7 @@
             return $http.delete("/api/user/" + uid + "/stock/" + symbol);
         }
 
-        function getCommentsByUser(userId) {
+        function getTimelineByUser(userId) {
             return $http.get(`/api/user/comments/${userId}`);
         }
     }
