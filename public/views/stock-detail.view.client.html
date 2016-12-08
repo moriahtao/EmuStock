@@ -22,8 +22,36 @@
         </tr>
         </tfoot>
     </table>
-    <!--TODO: DETAIL-->
-    <div>{{vm.details}}</div>
+    <!--Detail List-->
+    <table class="table table-striped table-hover ">
+        <thead>
+        <tr>
+            <th>Stock Name</th>
+            <th>{{vm.details.Name}}</th>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Current Time</td>
+            <td>{{vm.details.TimeStamp}}</td>
+        </tr>
+        <tr>
+            <td>Symbol</td>
+            <td>{{vm.details.Symbol}}</td>
+        </tr>
+        <tr>
+            <td>Last Price</td>
+            <td>{{vm.details.LastPrice}}</td>
+        </tr>
+        <tr>
+            <td>Change</td>
+            <td>{{vm.details.Change}}</td>
+        </tr>
+        <tr>
+            <td>Change Percent</td>
+            <td>{{vm.details.ChangePercent}}</td>
+        </tr>
+        </tbody>
+    </table>
 
     <!--CHART-->
     <div id="stock-chart"></div>
@@ -62,7 +90,8 @@
                           rows="5"
                           class="form-control"
                           id="comment-text"
-                          placeholder="Post your comment here"></textarea>
+                          placeholder="Post your comment here">
+                </textarea>
             </div>
             <span class="help-block">Add your comment to this stock</span>
         </fieldset>
