@@ -15,7 +15,17 @@
     function CommentListController($routeParams, SharedService, CommentService) {
         var vm = this;
         vm.shared = SharedService;
-        vm.comments = null;
+        vm.comments = [{
+            stockName: 'APPL',
+            text: 'the comment text',
+            userName: 'theUser',
+            createDate: '2016-08-08',
+        },{
+            stockName: 'APPL',
+            text: 'the comment text',
+            userName: 'theUser',
+            createDate: '2016-08-08',
+        }];
 
 
         if ($routeParams.symbol !== undefined) {
