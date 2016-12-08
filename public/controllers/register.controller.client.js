@@ -7,7 +7,7 @@
         .controller('RegisterController', RegisterController);
 
     function RegisterController($location, SharedService, UserService) {
-        var vm = this;
+        let vm = this;
         vm.shared = SharedService;
 
         vm.user = {};
@@ -15,7 +15,7 @@
         vm.register = function () {
             return UserService.register(vm.user)
                 .then(
-                    function (res) {
+                    function () {
                         console.log("Register success");
                         $location.url(vm.shared.getRoute('profile'));
                     },
