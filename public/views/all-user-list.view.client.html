@@ -5,7 +5,7 @@
     <h3>Discover friends</h3>
         <ul class="list-group">
             <li ng-repeat="user in vm.users" class="list-group-item">
-                <a href="#">
+                <a href="{{vm.shared.getRoute('')}}">
                     {{user.name}}
                 </a>
                 <!--use modal to show the chart of a stock-->

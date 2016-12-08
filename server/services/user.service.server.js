@@ -32,4 +32,5 @@ module.exports = function (models) {
     function findCommentsByUser(userId) {
         return models.user.findOne({_id: userId}).populate('comments');
     }
+
 };

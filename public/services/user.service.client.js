@@ -19,7 +19,7 @@
             unfollowStock: unfollowStock,
             login: login,
             logout: logout,
-            getCommentsByUser: getCommentsByUser,
+            getTimelineByUser: getTimelineByUser,
         };
 
         function login(user) {

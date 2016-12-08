@@ -31,10 +31,9 @@
                 });
         });
 
-        // TODO: uncomment this
-        // $routeProvider
-        //     .otherwise({
-        //         redirectTo: maps.login.route,
-        //     });
+        $routeProvider
+            .otherwise({
+                redirectTo: maps.login.route,
+            });
     }
 })();

@@ -1,8 +1,5 @@
 module.exports = function (models) {
+    return {
+    };
 
-
-
-    function findCommentsBySymbol(req, res) {
-
-    }
 };

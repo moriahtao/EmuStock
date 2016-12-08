@@ -1,9 +1,8 @@
 /**
  * Created by ChienliMa on 08/12/2016.
- */
-/**
  * Created by ChienliMa on 01/12/2016.
  */
+
 (function () {
     angular
         .module('EmuStock')
