@@ -1,0 +1,9 @@
+input.ng-invalid{
+    background-color: lightyellow;
+}
+.alertBox{
+    padding-top: 55px;
+}
+.loginSpan{
+    text-align:left;
+}
