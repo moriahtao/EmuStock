@@ -4,5 +4,6 @@ module.exports = function (db) {
         stock: {type: db.Schema.ObjectId, ref: 'StockModel'},
         replyTo: {type: db.Schema.ObjectId, ref: 'CommentModel'},
         html: String,
+        dateCreated: {type: Date, default: Date.now},
     }));
 };

@@ -19,7 +19,7 @@
             unfollowStock: unfollowStock,
             login: login,
             logout: logout,
-            getTimelineByUser: getTimelineByUser,
+            getTimelineByUserId: getTimelineByUserId,
         };
 
         function login(user) {
@@ -66,8 +66,8 @@
             return $http.delete("/api/user/" + uid + "/stock/" + symbol);
         }
 
-        function getTimelineByUser(userId) {
-            return $http.get(`/api/user/${userId}/timline/`);
+        function getTimelineByUserId(userId) {
+            return $http.get(`/api/user/${userId}/timeline/`);
         }
     }
 })();
