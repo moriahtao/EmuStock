@@ -3,21 +3,30 @@
         .module('EmuStock')
         .controller('StockDetailController', StockDetailController);
 
-    function StockDetailController($routeParams, SharedService, StockService) {
-        var vm = this;
+    function StockDetailController($routeParams, SharedService, StockService, CommentService) {
+        const vm = this;
         vm.shared = SharedService;
 
         vm.uid = $routeParams.uid;
         vm.stock = {symbol : $routeParams.symbol, followed : false};
         vm.term = "stock name";
         vm.comment = {};
+        vm.comments = null;
+
+        // get all comments for stock
+        CommentService.findCommentByStock(vm.stock.symbol)
+            .then(
+                function(res){
+                    vm.comments = res.data;
+                }
+            );
 
         // get user profile to know whether this stock is followed
         UserService.findUserById(vm.uid)
             .then(
                 function(res){
-                    var user = res.data;
-                    for(var i=0; i<user.stocks; i++){
+                    let user = res.data;
+                    for(let i=0; i<user.stocks; i++){
                         if(vm.stock.symbol == user.stocks[i]) {
                             vm.stock.followed = true;
                             break
@@ -40,8 +49,6 @@
                     vm.stock.chart = res;
                 }
             );
-
-
 
         vm.follow = function() {
             UserService.followStock(vm.uid, vm.stock.symbol)

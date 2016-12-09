@@ -11,8 +11,10 @@
     function CommentService($http) {
         return {
             getCommentById : getCommentById,
-            createComment : createComment(),
-            deleteCommentById : deleteCommentById()
+            createComment : createComment,
+            deleteCommentById : deleteCommentById,
+            findCommentByUserId : findCommentByUserId,
+            findCommentByStock : findCommentByStock,
         };
 
         function createComment(comment) {

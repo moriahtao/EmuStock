@@ -109,7 +109,7 @@ module.exports = function (models) {
         function getFollowings(user) {
             models.comment
                 .find({user: {$in: user.followings}})
-                .sort({dateCreated: -1})
+                .sort({createdAt: -1})
                 .then(getTimeline);
         }
 

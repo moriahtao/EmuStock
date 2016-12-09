@@ -4,7 +4,7 @@
         .controller('StockListController', StockListController);
 
     function StockListController($routeParams, SharedService, UserService) {
-        var vm = this;
+        const vm = this;
         vm.shared = SharedService;
 
         vm.uid = $routeParams.uid;
