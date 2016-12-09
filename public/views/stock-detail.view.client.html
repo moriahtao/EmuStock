@@ -1,4 +1,60 @@
-<nav-bar></nav-bar>
+<!--navigation-->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button"
+                    class="navbar-toggle"
+                    data-toggle="collapse"
+                    ng-init="isCollapsed = true"
+                    ng-click="isCollapsed = !isCollapsed">
+                <!--data-target="#bs-example-navbar-collapse-1">-->
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand">EmuStock</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+
+        <div class="navbar-collapse" ng-class="{collapse: isCollapsed}">
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="company or symbol" ng-model="vm.input">
+                </div>
+                <button type="submit" class="btn btn-default" ng-click="vm.lookup()">Search</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+
+                <li class="page-scroll">
+                    <a href="#{{vm.shared.getRoute('profile')}}">Profile</a>
+                </li>
+
+                <li class="page-scroll">
+                    <a href="#{{vm.shared.getRoute('timeline')}}">TimeLine</a>
+                </li>
+                <li class="page-scroll">
+                    <a href="#{{vm.shared.getRoute('self_stocks')}}">My Stock</a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Social <span
+                            class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#{{vm.shared.getRoute('self_follower')}}">My follower</a></li>
+                        <li><a href="#{{vm.shared.getRoute('self_following')}}">My following</a></li>
+                    </ul>
+                </li>
+                <li class="page-scroll">
+                    <a ng-click="vm.logout()"><span class="fa fa-sign-out"></span>Logout</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
 
 <div class="container top">
     <table class="table table-striped" ng-if="vm.result">
@@ -55,7 +111,19 @@
 
     <!--CHART-->
     <div id="stock-chart"></div>
+    <p>
+        <a ng-if="!vm.followed"
+           ng-click="vm.follow()"
+           class="btn btn-success btn-block">
+            <span class="fa fa fa-heart"></span>Add to my list
+        </a>
 
+        <a ng-if="vm.followed"
+           ng-click="vm.unfollow()"
+           class="btn btn-danger btn-block">
+            <span class="fa fa fa-trash"></span>Remove from my list
+        </a>
+    </p>
 
     <!--COMMENTS-->
     <ul class="breadcrumb">
@@ -73,29 +141,13 @@
         <fieldset>
             <legend>Leave a comment</legend>
             <div class="form-group">
-                <label for="comment-title">Title</label>
-                <!--title for the comment-->
-                <input ng-model="vm.myComment.title"
-                       type="text"
-                       name="title"
-                       class="form-control"
-                       id="comment-title"
-                       placeholder="Comment title">
+                <div class="col-lg-10">
+                    <textarea class="form-control" rows="5" id="textArea"></textarea>
+                    <span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span>
+                    <a class="btn btn-primary btn-block col-lg-2"
+                       ng-click="vm.createComment(vm.myComment)">Post</a>
+                </div>
             </div>
-            <div class="form-group">
-                <!--text for the comment-->
-                <textarea ng-model="vm.myComment.text"
-                          type="text"
-                          name="text"
-                          rows="5"
-                          class="form-control"
-                          id="comment-text"
-                          placeholder="Post your comment here">
-                </textarea>
-            </div>
-            <span class="help-block">Add your comment to this stock</span>
         </fieldset>
     </form>
-    <a class="btn btn-primary  btn-block"
-       ng-click="vm.createComment(vm.myComment)">Delete</a>
 </div>
