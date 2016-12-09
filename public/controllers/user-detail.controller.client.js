@@ -4,6 +4,7 @@
         .controller('UserDetailController', UserDetailController);
 
     function UserDetailController($routeParams, SharedService, UserService) {
+
         var vm = this;
         vm.shared = SharedService;
 
@@ -12,6 +13,8 @@
 
         vm.self = null;
         vm.other = null;
+
+
 
         // get user profile to know whether this stock is followed
         UserService.findUserById(vm.self_uid)
