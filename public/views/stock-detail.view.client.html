@@ -58,7 +58,6 @@
     </ul>
     <!--comment list-->
     <div ng-repeat="comment in vm.comments">
-        <h2>{{comment.title}}</h2>
         <p>{{comment.text}}</p>
         <small>{{comment.user}} <cite title="Source Title" class="text-muted">post on {{comment.createdAt}}</cite>
         </small>
@@ -70,7 +69,7 @@
             <div class="form-group">
                 <div class="col-lg-10">
                     <textarea class="form-control" rows="5" id="textArea"></textarea>
-                    <span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span>
+                    <span class="help-block">Share your reviews towards this stock!</span>
                     <a class="btn btn-primary btn-block col-lg-2"
                        ng-click="vm.createComment(vm.myComment)">Post</a>
                 </div>
