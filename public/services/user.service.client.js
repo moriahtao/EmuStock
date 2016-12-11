@@ -43,11 +43,11 @@
         }
 
         function currentUser() {
-            return $http.get("api/user/current");
+            return $http.get("/api/user/current");
         }
 
         function updateUser(user) {
-            return $http.put("/api/user/update", user);
+            return $http.put("/api/user/", user);
         }
 
         function followUser(uid, f_uid) {
