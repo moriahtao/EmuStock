@@ -26,7 +26,7 @@
                         }
 
                     },
-                    () => console.warn("Invalid username password pair")
+                    () => vm.error = "Invalid username password pair"
                 );
             }
         }
