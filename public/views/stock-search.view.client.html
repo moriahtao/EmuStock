@@ -14,7 +14,7 @@
         <tbody>
         <tr ng-repeat="item in vm.results">
             <td>{{item.Symbol}}</td>
-            <td><a href="#{{vm.shared.getRoute('self_stock_detail', {symbol: item.Symbol})}}">{{item.Name}}</a></td>
+            <td><a href="#{{vm.shared.getRoute('self_stock_detail',  {symbol: item.Symbol})}}">{{item.Name}}</a></td>
             <td>{{item.Exchange}}</td>
         </tr>
         </tbody>
