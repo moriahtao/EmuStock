@@ -22,7 +22,7 @@ module.exports = function (models) {
     }
 
     function findCommentsBySymbol(req, res) {
-        var symbol = req.query.symbol;
+        var symbol = req.params.symbol;
         models.comment.find({stock: symbol}).then(
             comments => res.json(comments)
         );
