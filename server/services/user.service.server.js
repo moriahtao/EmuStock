@@ -1,14 +1,14 @@
 module.exports = function (models) {
 
-    const passport = require('passport');
-    const LocalStrategy = require('passport-local').Strategy;
-    const bcrypt = require("bcrypt-nodejs");
+    var passport = require('passport');
+    var LocalStrategy = require('passport-local').Strategy;
+    var bcrypt = require("bcrypt-nodejs");
 
-    passport.serializeUser = function (user, done) {
+    passport.serializeUser((user, done) => {
         done(null, user);
-    };
+    });
 
-    passport.deserializeUser = function (user, done) {
+    passport.deserializeUser((user, done) => {
         models.user.findOne({_id: user._id}).then(
             user => {
                 done(null, user);
@@ -17,7 +17,7 @@ module.exports = function (models) {
                 done(err, null);
             }
         );
-    };
+    });
 
     passport.use(new LocalStrategy(
         function (username, password, done) {
@@ -74,7 +74,7 @@ module.exports = function (models) {
 
     function register(req, res) {
         // TODO: prevent duplicate usernames
-        const user = req.body;
+        var user = req.body;
         user.password = bcrypt.hashSync(user.password);
         models.user.create(user).then(
             user => req.login(user, err => res.json(user))
@@ -82,29 +82,29 @@ module.exports = function (models) {
     }
 
     function findUserById(req, res) {
-        const userId = req.params.userId;
+        var userId = req.params.userId;
         models.user.findOne({_id: userId}).then(
             user => res.json(user)
         );
     }
 
     function updateUser(req, res) {
-        const userId = req.user._id;
-        const user = req.body;
+        var userId = req.user._id;
+        var user = req.body;
         models.user.update({_id: userId}, user).then(
             () => res.sendStatus(200)
         );
     }
 
     function deleteUser(req, res) {
-        const userId = req.params.userId;
+        var userId = req.params.userId;
         models.user.remove({_id: userId}).then(
             () => res.sendStatus(200)
         );
     }
 
     function getTimelineByUserId(req, res) {
-        const userId = req.params.userId;
+        var userId = req.params.userId;
         models.user.findOne({_id: userId}).then(getFollowings);
 
         function getFollowings(user) {
@@ -120,14 +120,14 @@ module.exports = function (models) {
     }
 
     function findUserByUsername(req, res) {
-        const username = req.query.username;
+        var username = req.query.username;
         models.user.findOne({username: username}).then(
             user => res.json(user)
         );
     }
 
     function searchUsersByUsername(req, res) {
-        const username = req.query.username;
+        var username = req.query.username;
         models.user.find({username: new RegExp(`.*${username}.*`, 'i')}).then(
             users => res.json(users)
         );

@@ -1,5 +1,5 @@
 module.exports = function (app, services) {
-    const passport = require('passport');
+    var passport = require('passport');
 
     // public APIs
     app.get('/api/user/loggedin', services.user.loggedin);
