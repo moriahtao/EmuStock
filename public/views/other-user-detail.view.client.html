@@ -25,7 +25,7 @@
                 </tbody>
             </table>
         </div>
-        <p>
+        <p ng-if="vm.user._id !== vm.other._id">
             <a ng-if="!vm.other.followed"
                ng-click="vm.follow()"
                class="btn btn-primary btn-block">
