@@ -16,6 +16,5 @@
         const vm = this;
         vm.shared = SharedService;
         vm.shared.initController(vm);
-        console.log(vm.followers, vm.followings);
     }
 })();

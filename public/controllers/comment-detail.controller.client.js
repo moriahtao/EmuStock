@@ -6,24 +6,22 @@
     function CommentDetailController($routeParams, SharedService, CommentService) {
         const vm = this;
         vm.shared = SharedService;
-        vm.shared.initController(vm);
+        vm.shared.initController(vm, init);
 
-        vm.comment_id = $routeParams.cid;
-        vm.main_comment = null;
-        vm.following_comments = [];
+        function init() {
+            vm.comment_id = $routeParams.cid;
+            vm.main_comment = null;
+            vm.following_comments = [];
 
-        CommentService.getCommentById(vm.comment_id)
-            .then(
-                function(res) {
-                    vm.main_comment = res.data;
-                }
+            CommentService.getCommentById(vm.comment_id).then(
+                res => vm.main_comment = res.data
             );
 
-        CommentService.getCommentByReplyToId(vm.comment_id)
-            .then(
-                function(res) {
-                    vm.following_comments = res.data;
-                }
+            CommentService.getCommentByReplyToId(vm.comment_id).then(
+                res => vm.following_comments = res.data
             );
+        }
+
     }
-})();
+})
+();

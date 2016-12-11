@@ -17,13 +17,10 @@
         }
 
         function search() {
-            UserService.searchUserByUsername(vm.term)
-                .then(
-                    function(res) {
-                        vm.users = res.data;
-                    }
-                )
-        };
+            UserService.searchUserByUsername(vm.term).then(
+                res => vm.users = res.data
+            )
+        }
 
     }
 })();

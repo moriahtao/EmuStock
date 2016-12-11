@@ -9,7 +9,6 @@
     function RegisterController($location, SharedService, UserService) {
         const vm = this;
         vm.shared = SharedService;
-        vm.shared.initController(vm);
 
         vm.user = {};
 

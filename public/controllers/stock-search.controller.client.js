@@ -17,12 +17,9 @@
             vm.results = [];
             vm.stock = {};
 
-            StockService.lookup(vm.input)
-                .then(
-                    function (res) {
-                        vm.results = res.data;
-                    }
-                );
+            StockService.lookup(vm.input).then(
+                res => vm.results = res.data
+            );
         }
     }
 })();
