@@ -24,9 +24,9 @@
             } else {
                 return UserService.register(vm.user)
                     .then(
-                        function () {
+                        function (res) {
                             console.log("Register success");
-                            $location.url(vm.shared.getRoute('profile'));
+                            $location.url(vm.shared.getRoute('profile', {s_uid: res.data._id}));
                         },
                         function (err) {
                             console.warn(err.data);
