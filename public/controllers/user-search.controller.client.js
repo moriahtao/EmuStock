@@ -9,21 +9,19 @@
     function UserSearchController($routeParams, SharedService, UserService) {
         const vm = this;
         vm.shared = SharedService;
+        vm.shared.initController(vm, init);
 
-        vm.uid = $routeParams.s_uid;
+        function init() {
+            vm.term = ""; // used for user search
+            vm.search = function() {
+                UserService.searchUserByUsername(vm.term)
+                    .then(
+                        function(res) {
+                            vm.users = res.data;
+                        }
+                    )
+            };
+        }
 
-        vm.users = [];
-        vm.user = {};
-        vm.term = ""; // used for user search
-        vm.users = {};
-
-        vm.search = function() {
-            UserService.searchUserByUsername(vm.term)
-                .then(
-                    function(res) {
-                        vm.users = res.data;
-                    }
-                )
-        };
     }
 })();

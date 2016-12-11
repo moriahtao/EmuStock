@@ -13,6 +13,7 @@
                 symbol: $routeParams.symbol,
                 followed: vm.user.stocks.indexOf(vm.stock.symbol) !== -1,
             };
+
             vm.comment = {
                 html: "",
                 user: vm.user._id,

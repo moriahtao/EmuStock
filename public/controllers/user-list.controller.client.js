@@ -12,16 +12,9 @@
         .module('EmuStock')
         .controller('UserListController', UserListController);
 
-    function UserListController($location, $routeParams, SharedService, UserService) {
+    function UserListController(SharedService) {
         const vm = this;
         vm.shared = SharedService;
-
-        vm.uid = $routeParams.s_uid;
-        vm.user = {};
-
-        // initialization : get user profile to know whether this stock is followed
-        UserService.findUserById(vm.uid).then(
-            res => vm.user = res.data
-        );
+        vm.shared.initController(vm);
     }
 })();

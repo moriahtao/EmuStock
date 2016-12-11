@@ -6,38 +6,52 @@
     function UserDetailController($routeParams, SharedService, UserService) {
         const vm = this;
         vm.shared = SharedService;
+        vm.shared.initController(vm, init);
 
-        vm.self_uid = $routeParams.self_uid;
-        vm.other_uid = $routeParams.other_uid;
+        function init() {
+            vm.self_uid = $routeParams.self_uid;
+            vm.other_uid = $routeParams.other_uid;
 
-        vm.self = null;
-        vm.other = null;
+            vm.self = null;
+            vm.other = null;
 
+            vm.follow = follow;
+            vm.unfollow = unfollow;
 
-
-        // get user profile to know whether this stock is followed
-        UserService.findUserById(vm.self_uid)
-            .then(
-                function(res){
-                    vm.self = res.data;
-                    if(vm.other) {
-                        setFollowed(); // in the end of file
+            // get user profile to know whether this stock is followed
+            UserService.findUserById(vm.self_uid)
+                .then(
+                    function(res){
+                        vm.self = res.data;
+                        if(vm.other) {
+                            setFollowed(); // in the end of file
+                        }
                     }
-                }
-            );
+                );
 
-        UserService.findUserById(vm.other_uid)
-            .then(
-                function(res){
-                    vm.other = res.data;
-                    if(vm.self) {
-                        setFollowed(); // in the end of file
+            UserService.findUserById(vm.other_uid)
+                .then(
+                    function(res){
+                        vm.other = res.data;
+                        if(vm.self) {
+                            setFollowed(); // in the end of file
+                        }
                     }
+                );
+        }
+
+        // initialization helper function
+        function setFollowed(){
+            for(var i=0; i<vm.self.followings; i++){
+                if(vm.other_uid == vm.self.followings[i]) {
+                    vm.other.followed = true;
+                    break
                 }
-            );
+            }
+        }
 
         // functions
-        vm.follow = function() {
+        function follow() {
             UserService.followUser(vm.self_uid, vm.other_uid)
                 .then(
                     function() {
@@ -49,9 +63,9 @@
                         console.warn("follow failed. try again later");
                     }
                 );
-        };
+        }
 
-        vm.unfollow = function() {
+        function unfollow() {
             UserService.unfollowUser(vm.self_uid, vm.other_uid)
                 .then(
                     function() {
@@ -59,16 +73,6 @@
                         vm.other.followed = false;
                     }
                 );
-        };
-
-        // helper function
-        function setFollowed(){
-            for(var i=0; i<vm.self.followings; i++){
-                if(vm.other_uid == vm.self.followings[i]) {
-                    vm.other.followed = true;
-                    break
-                }
-            }
         }
     }
 })();

@@ -6,6 +6,7 @@
     function LoginController($location, SharedService, UserService) {
         const vm = this;
         vm.shared = SharedService;
+        vm.shared.initController(vm, init);
 
         vm.user = {};
 

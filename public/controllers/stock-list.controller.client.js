@@ -6,21 +6,17 @@
     function StockListController($location, $routeParams, SharedService, UserService) {
         const vm = this;
         vm.shared = SharedService;
+        vm.shared.initController(vm, init);
 
-        vm.uid = $routeParams.s_uid;
-        vm.stocks = [];
-        vm.input = "";
+        function init(){
+            vm.stocks = vm.user.stocks;
+            vm.input = "";
+            vm.search = search;
+        }
 
-        UserService.findUserById(vm.uid)
-            .then(
-                function(res) {
-                    vm.stocks = res.data.stocks;
-                }
-            );
-
-        vm.search = function() {
+        function search() {
             $location.url(vm.shared.getRoute('stock_search') + `?input=${vm.input}`);
-        };
+        }
     }
 })();
 
