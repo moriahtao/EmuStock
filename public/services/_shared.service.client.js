@@ -29,6 +29,11 @@
             },
 
             // users
+            search_user: {
+                route: '/self/:s_uid/search_user',
+                view: 'views/search-user.view.client.html',
+                controller: 'UserSearchController'
+            },
             self_following: {
                 route: '/self/:s_uid/following',
                 view: 'views/following.view.client.html',
