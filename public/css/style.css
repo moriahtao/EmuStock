@@ -7,3 +7,6 @@ input.ng-invalid{
 .loginSpan{
     text-align:left;
 }
+.stockChart {
+    width: 100%;
+}

@@ -17,15 +17,16 @@
             <th>Stock Symbol</th>
             <th>Stock Name</th>
             <th>Last Price</th>
+        <tr>
         </thead>
         <tbody>
             <tr ng-repeat="item in vm.stocks">
                 <td>{{item.quote.Symbol}}</td>
                 <td><a href="#{{vm.shared.getRoute('self_stock_detail', {symbol: stock})}}">{{item.quote.Name}}</a></td>
-                <td ng-if="item.quote.LastPrice < 0" class="text-success">
+                <td ng-if="item.quote.Change < 0" class="text-success">
                     {{item.quote.LastPrice}}
                 </td>
-                <td ng-if="item.quote.LastPrice > 0" class="text-danger">
+                <td ng-if="item.quote.Change > 0" class="text-danger">
                     {{item.quote.LastPrice}}
                 </td>
             </tr>

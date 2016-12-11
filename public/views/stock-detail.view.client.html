@@ -3,7 +3,7 @@
 <div class="container top">
 
     <!--CHART-->
-    <div id="stock-chart"></div>
+    <div class="stockChart" id="stock-chart"></div>
 
     <!--STOCK DETAIL LIST-->
     <table class="table table-striped table-hover ">
@@ -51,27 +51,26 @@
         </a>
     </p>
     <!--create my comment-->
-    <form class="form-horizontal">
-        <fieldset>
-            <legend>Leave a comment</legend>
-            <div class="form-group">
-                <div class="col-lg-10">
+    <br>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Leave a comment</h3>
+        </div>
+    </div>
+    <div class="form-group">
                     <textarea ng-model="vm.comment.html" class="form-control" rows="5" id="textArea"></textarea>
                     <span class="help-block">Share your reviews towards this stock!</span>
-                    <a class="btn btn-primary btn-block col-lg-2"
+                    <a class="btn btn-primary btn-block"
                        ng-click="vm.createComment()">Post</a>
-                </div>
-            </div>
-        </fieldset>
-    </form>
+    </div>
     <!--COMMENTS-->
     <ul class="breadcrumb">
-        <li class="active">Comments</li>
+        <li class="active">See all the comments</li>
     </ul>
     <!--comment list-->
     <div ng-repeat="comment in vm.comments">
         <p>{{comment.html}}</p>
-        <small>{{comment.user.username}} <cite title="Source Title" class="text-muted">posted on {{comment.createdAt}}</cite>
+        <small>{{comment.user.username}} <cite title="Source Title">posted on {{comment.createdAt}}</cite>
         </small>
     </div>
 
