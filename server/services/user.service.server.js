@@ -139,7 +139,7 @@ module.exports = function (models) {
     function unfollowStock(req, res) {
         var userId = req.params.userId;
         var symbol = req.params.symbol;
-        models.user.update({_id: userId}, {$pull: {stocks: symbol}}).then(
+        models.user.update({_id: userId}, {$pullAll: {stocks: symbol}}).then(
             () => res.sendStatus(200)
         );
     }
@@ -157,8 +157,8 @@ module.exports = function (models) {
     function unfollowUser(req, res) {
         var userId = req.params.userId;
         var f_uid = req.params.f_uid;
-        models.user.update({_id: userId}, {$pull: {followings: f_uid}}).then(
-            () => models.user.update({_id: f_uid}, {$pull: {followers: userId}}).then(
+        models.user.update({_id: userId}, {$pullAll: {followings: f_uid}}).then(
+            () => models.user.update({_id: f_uid}, {$pullAll: {followers: userId}}).then(
                 () => res.sendStatus(200)
             )
         );

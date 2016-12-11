@@ -29,12 +29,12 @@
             <a ng-if="!vm.other.followed"
                ng-click="vm.follow()"
                class="btn btn-primary btn-block">
-                <span class="fa fa fa-heart"></span>   Follow
+                <span class="fa fa fa-heart"></span>Follow
             </a>
 
             <a ng-if="vm.other.followed"
                ng-click="vm.unfollow()"
-               class="btn btn-default btn-block">
+               class="btn btn-danger btn-block">
                 <span class="fa fa fa-trash"></span>Unfollow
             </a>
         </p>

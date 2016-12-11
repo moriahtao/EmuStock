@@ -21,24 +21,15 @@
                 .then(
                     function (res) {
                         vm.other = res.data;
-                        setFollowed(); // in the end of file
+                        console.log(vm.other.followers);
+                        vm.other.followed = vm.other.followers.filter(x => x._id === vm.self._id).length >= 1;
                     }
                 );
         }
 
-        // initialization helper function
-        function setFollowed() {
-            for (var i = 0; i < vm.self.followings; i++) {
-                if (vm.other_uid == vm.self.followings[i]) {
-                    vm.other.followed = true;
-                    break
-                }
-            }
-        }
-
         // functions
         function follow() {
-            UserService.followUser(vm.self_uid, vm.other_uid)
+            UserService.followUser(vm.self._id, vm.other_uid)
                 .then(
                     function () {
                         console.log("follow success.");
@@ -52,7 +43,7 @@
         }
 
         function unfollow() {
-            UserService.unfollowUser(vm.self_uid, vm.other_uid)
+            UserService.unfollowUser(vm.self._id, vm.other_uid)
                 .then(
                     function () {
                         console.log("unfollow success.");
