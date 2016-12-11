@@ -9,7 +9,7 @@
         vm.shared.initController(vm, init);
 
         function init() {
-            vm.other_uid = $routeParams.other_uid;
+            vm.other_uid = $routeParams.o_uid;
 
             vm.self = vm.user;
             vm.other = null;
