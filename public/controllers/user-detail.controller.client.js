@@ -17,14 +17,16 @@
             vm.follow = follow;
             vm.unfollow = unfollow;
 
+            vm.stocks = vm.user.stocks;
+
             UserService.findUserById(vm.other_uid)
                 .then(
                     function (res) {
                         vm.other = res.data;
-                        console.log(vm.other.followers);
                         vm.other.followed = vm.other.followers.filter(x => x._id === vm.self._id).length >= 1;
                     }
                 );
+
         }
 
         // functions
