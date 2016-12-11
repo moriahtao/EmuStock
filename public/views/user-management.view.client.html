@@ -11,13 +11,13 @@
     </tr>
     </thead>
     <tbody>
-    <tr >
-        <td class="adminTb">aaa</td>
-        <td class="adminTb"><a class="btn btn-primary btn-xs">delete</a></td>
-    </tr>
-    <tr >
-        <td class="adminTb">{{user.username}}</td>
-        <td class="adminTb"><a class="btn btn-primary btn-xs">delete</a></td>
+    <tr ng-repeat="user in vm.users">
+        <td class="adminTb">
+            <a href="#{{vm.shared.getRoute('comment_management', {o_uid: user._id})}}">{{user.username}}</a>
+        </td>
+        <td class="adminTb">
+            <a ng-click="vm.deleteUser(user._id)" class="btn btn-primary btn-xs">delete</a>
+        </td>
     </tr>
     </tbody>
 </table>
