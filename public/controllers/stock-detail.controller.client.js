@@ -6,43 +6,47 @@
     function StockDetailController($routeParams, $route, SharedService, UserService, StockService, CommentService) {
         const vm = this;
         vm.shared = SharedService;
+        vm.shared.initController(vm, init);
 
-        vm.uid = $routeParams.s_uid;
-        vm.stock = {symbol: $routeParams.symbol, followed: false};
-        vm.comment = {
-            html: "",
-            user: vm.uid,
-            stock: vm.stock.symbol,
-        };
-        vm.comments = null;
+        function init() {
+            vm.stock = {
+                symbol: $routeParams.symbol,
+                followed: vm.user.stocks.indexOf(vm.stock.symbol) !== -1,
+            };
+            vm.comment = {
+                html: "",
+                user: vm.user._id,
+                stock: vm.stock.symbol,
+            };
+            vm.comments = [];
+
+            vm.follow = follow;
+            vm.unfollow = unfollow;
+            vm.createComment = createComment;
+
+            getStockDetails();
+            getComments();
+            plotChart();
+        }
+
 
         // get all comments for stock
-        CommentService.findCommentByStock(vm.stock.symbol)
-            .then(
-                function (res) {
-                    vm.comments = res.data;
-                }
+        function getComments() {
+            CommentService.findCommentByStock(vm.stock.symbol).then(
+                res => vm.comments = res.data
             );
-
-        // get user profile to know whether this stock is followed
-        UserService.findUserById(vm.uid)
-            .then(
-                function (res) {
-                    let user = res.data;
-                    vm.stock.followed = user.stocks.indexOf(vm.stock.symbol) !== -1;
-                }
-            );
+        }
 
         // get stock details
-        StockService.quote(vm.stock.symbol)
-            .then(
-                function (res) {
-                    vm.stock.quote = res.data;
-                }
+        function getStockDetails() {
+            StockService.quote(vm.stock.symbol).then(
+                res => vm.stock.quote = res.data
             );
+        }
 
-        StockService.chart(vm.stock.symbol)
-            .then(
+        // plot chart of stock price
+        function plotChart() {
+            StockService.chart(vm.stock.symbol).then(
                 function (res) {
                     vm.stock.chart = res.data;
                     var points = [];
@@ -74,9 +78,11 @@
                     });
                 }
             );
+        }
 
-        vm.follow = function () {
-            UserService.followStock(vm.uid, vm.stock.symbol)
+        function follow() {
+
+            UserService.followStock(vm.user._id, vm.stock.symbol)
                 .then(
                     function () {
                         console.log("follow success.");
@@ -86,26 +92,22 @@
                         console.warn("follow failed. try again later");
                     }
                 );
-        };
+        }
 
-        vm.unfollow = function () {
-            UserService.unfollowStock(vm.uid, vm.stock.symbol)
+        function unfollow() {
+            UserService.unfollowStock(vm.user._id, vm.stock.symbol)
                 .then(
                     function () {
                         console.log("unfollow success.");
                         vm.stock.followed = false;
                     }
                 );
-        };
+        }
 
-        vm.createComment = function () {
-            CommentService.createComment(vm.comment)
-                .then(
-                    function (res) {
-                        // todo : add comment to current comment list or refresh page
-                        $route.reload();
-                    }
-                );
+        function createComment() {
+            CommentService.createComment(vm.comment).then(
+                res => $route.reload()
+            );
         }
     }
 })();

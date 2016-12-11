@@ -3,37 +3,21 @@
         .module('EmuStock')
         .controller('ProfileController', ProfileController);
 
-    function ProfileController($location, $routeParams, SharedService, UserService) {
+    function ProfileController(SharedService, UserService) {
         const vm = this;
         vm.shared = SharedService;
+        vm.shared.initController(vm, init);
 
-        vm.user = {};
+        function init() {
+            vm.update = update;
+        }
 
-        UserService.findUserById($routeParams.s_uid).then(
-            function (res) {
-                vm.user = res.data;
-            },
-            function (err) {
-                console.warn("error fetch user profile: " + err);
-            }
-        );
-
-        vm.update = function () {
+        function update() {
             UserService.updateUser(vm.user).then(
                 () => console.log("update succeeded"),
                 () => console.warn("update failed, please try again later")
             )
-        };
-
-        vm.logout = function () {
-            //TODO: apply this to all controllers
-            UserService.logout().then(
-                () => {
-                    console.log('logout succeeded');
-                    $location.url(vm.shared.getRoute('login'));
-                },
-                () => console.warn('logout failed, please try again later')
-            );
         }
+
     }
 })();

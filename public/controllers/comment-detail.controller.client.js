@@ -6,6 +6,8 @@
     function CommentDetailController($routeParams, SharedService, CommentService) {
         const vm = this;
         vm.shared = SharedService;
+        vm.shared.initController(vm);
+
         vm.comment_id = $routeParams.cid;
         vm.main_comment = null;
         vm.following_comments = [];

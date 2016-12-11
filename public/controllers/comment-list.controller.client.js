@@ -15,6 +15,8 @@
     function CommentListController($routeParams, $location, SharedService, CommentService) {
         const vm = this;
         vm.shared = SharedService;
+        vm.shared.initController(vm);
+
         vm.comments = [{
             stockName: 'APPL',
             text: 'the comment text',

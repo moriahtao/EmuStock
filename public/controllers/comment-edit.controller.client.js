@@ -6,6 +6,8 @@
     function CommentEditController($routeParams, SharedService, CommentService) {
         const vm = this;
         vm.shared = SharedService;
+        vm.shared.initController(vm);
+
         vm.comment_id = $routeParams.cid;
         vm.comment = null;
 

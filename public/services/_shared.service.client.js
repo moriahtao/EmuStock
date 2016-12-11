@@ -3,7 +3,7 @@
         .module("EmuStock")
         .factory("SharedService", SharedService);
 
-    function SharedService($routeParams) {
+    function SharedService($location, $routeParams, UserService) {
         var maps = {
             login: {
                 route: '/login',
@@ -108,6 +108,7 @@
         return {
             maps: maps,
             getRoute: getRoute,
+            initController: initController,
         };
 
         /*
@@ -125,5 +126,35 @@
                         priorDict[key] : $routeParams[key];
                 });
         }
+
+        /*
+         * Initialize given view controller, then callback after finishing
+         * get the following properties:
+         *  - vm.user
+         *  - vm.logout
+         */
+        function initController(vm, callback) {
+            vm.user = {};
+            vm.logout = logout;
+
+            UserService.findUserById($routeParams.s_uid).then(
+                res => {
+                    vm.user = res.data;
+                    if (callback !== undefined) callback();
+                },
+                err => console.warn("error fetch user profile: " + err)
+            );
+
+            function logout() {
+                UserService.logout().then(
+                    () => {
+                        console.log('logout succeeded');
+                        $location.url(getRoute('login'));
+                    },
+                    () => console.warn('logout failed, please try again later')
+                );
+            }
+        }
     }
-})();
+})
+();
