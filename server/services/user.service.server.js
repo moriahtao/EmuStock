@@ -48,6 +48,8 @@ module.exports = function (models) {
         updateUser: updateUser,
         deleteUser: deleteUser,
         getTimelineByUserId: getTimelineByUserId,
+        followStock: followStock,
+        unfollowStock: unfollowStock,
     };
 
 
@@ -117,6 +119,22 @@ module.exports = function (models) {
         function getTimeline(comments) {
             res.json(comments);
         }
+    }
+
+    function followStock(req, res) {
+        var userId = req.params.userId;
+        var symbol = req.params.symbol;
+        models.user.update({_id: userId}, {$push: {stocks: symbol}}).then(
+            () => res.sendStatus(200)
+        );
+    }
+
+    function unfollowStock(req, res) {
+        var userId = req.params.userId;
+        var symbol = req.params.symbol;
+        models.user.update({_id: userId}, {$pull: {stocks: symbol}}).then(
+            () => res.sendStatus(200)
+        );
     }
 
     function findUserByUsername(req, res) {
