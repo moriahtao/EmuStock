@@ -17,6 +17,6 @@ module.exports = function (app, services) {
     app.get('/api/user/:userId/timeline', services.user.getTimelineByUserId);
     app.post('/api/comment', services.comment.createComment);
     app.get('/api/user/:userId/comments', services.comment.findCommentsByUser);
-    app.get('/api/stock/:symbol/comments', services.comment.findCommentsBySymbol);
+    app.get('/api/comment/stock/:symbol', services.comment.findCommentsBySymbol);
     app.delete('/api/comment/:commentId', services.comment.deleteCommentById);
 };
