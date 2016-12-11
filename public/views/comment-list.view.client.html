@@ -6,7 +6,7 @@
         <blockquote>
             <p>{{comment.html}}</p>
             <small>
-                <a href="#{{vm.shared.getRoute('user_detail',  {o_uid: user._id})}}">{{comment.user.username}}</a>
+                <a href="#{{vm.shared.getRoute('user_detail',  {o_uid: comment.user._id})}}">{{comment.user.username}}</a>
                 <cite title="Source Title" class="text-muted">{{comment.createdAt}}</cite>
             </small>
         </blockquote>
