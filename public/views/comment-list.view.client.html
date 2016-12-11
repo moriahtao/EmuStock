@@ -3,10 +3,10 @@
 <div class="container top">
 
     <div ng-repeat="comment in vm.comments">
-        <h2>{{comment.stock}}</h2>
+        <h2>{{comment.user.username}}</h2>
         <blockquote>
-            <p>{{comment.text}}</p>
-            <small>{{comment.user}} <cite title="Source Title" class="text-muted">{{comment.createdAt}}</cite></small>
+            <p>{{comment.html}}</p>
+            <small>{{comment.stock}} <cite title="Source Title" class="text-muted">{{comment.createdAt}}</cite></small>
         </blockquote>
     </div>
 </div>
