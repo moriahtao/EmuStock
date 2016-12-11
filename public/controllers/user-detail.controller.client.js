@@ -13,6 +13,8 @@
         vm.self = null;
         vm.other = null;
 
+
+
         // get user profile to know whether this stock is followed
         UserService.findUserById(vm.self_uid)
             .then(

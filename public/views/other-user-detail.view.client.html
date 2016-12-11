@@ -1,29 +1,30 @@
 <nav-bar></nav-bar>
 
+
 <div class="container top">
     <div class="jumbotron">
-        <h3>vm.user.name</h3>
+        <h3>{{vm.user.username}}</h3>
 
         <!--show this user's list of stocks-->
-        <ul class="list-group">
-            <li ng-repeat="stock in vm.stocks" class="list-group-item">
+        <ul class="nav nav-pills nav-stacked">
+            <li ng-repeat="stock in vm.stocks" >
                 <a href="{{vm.shared.getRoute('self_stock_detail')}}">
                     {{stock.name}}
                 </a>
             </li>
         </ul>
-
         <!--show the button to follow/unfollow this user-->
+        <br>
         <p>
             <a ng-if="!vm.other.followed"
                ng-click="vm.follow()"
-               class="btn btn-success btn-block">
-                <span class="fa fa fa-heart"></span>Follow
+               class="btn btn-primary btn-block">
+                <span class="fa fa fa-heart"></span>   Follow
             </a>
 
             <a ng-if="vm.other.followed"
                ng-click="vm.unfollow()"
-               class="btn btn-danger btn-block">
+               class="btn btn-default btn-block">
                 <span class="fa fa fa-trash"></span>Unfollow
             </a>
         </p>

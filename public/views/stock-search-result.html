@@ -1,0 +1,87 @@
+<!--input name for a stock symbol on nav bar-->
+
+
+
+<!--navigation-->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header page-scroll">
+            <button type="button"
+                    class="navbar-toggle"
+                    data-toggle="collapse"
+                    ng-init="isCollapsed = true"
+                    ng-click="isCollapsed = !isCollapsed">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand">EmuStock</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+
+        <div class="navbar-collapse" ng-class="{collapse: isCollapsed}">
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <!--input name/symbol for a stock-->
+                    <input type="text" class="form-control" placeholder="company or symbol" ng-model="vm.term">
+                </div>
+                <!--search button-->
+                <button type="submit" class="btn btn-default" ng-click="vm.search()">Search</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+
+                <li class="page-scroll">
+                    <a href="#{{vm.shared.getRoute('profile')}}">Profile</a>
+                </li>
+
+                <li class="page-scroll">
+                    <a href="#{{vm.shared.getRoute('timeline')}}">TimeLine</a>
+                </li>
+                <li class="page-scroll">
+                    <a href="#{{vm.shared.getRoute('self_stocks')}}">My Stock</a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Social <span
+                            class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#{{vm.shared.getRoute('self_follower')}}">My follower</a></li>
+                        <li><a href="#{{vm.shared.getRoute('self_following')}}">My following</a></li>
+                    </ul>
+                </li>
+                <li class="page-scroll">
+                    <a ng-click="vm.logout()"><span class="fa fa-sign-out"></span>Logout</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+
+
+<!--TODO: The binding name is not sure-->
+<div class="container top">
+    <table class="table table-striped table-hover" ng-if="vm.result">
+        <thead>
+        <tr>
+            <th>Symbol</th>
+            <th>Name</th>
+            <th>Exchange</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in vm.result">
+            <td>{{item.Symbol}}</td>
+            <td><a ng-click="vm.quote(item.Symbol)">{{item.Name}}</a></td>
+            <td>{{item.Exchange}}</td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="3">Total Results: {{vm.result.length}}</td>
+        </tr>
+        </tfoot>
+    </table>
+</div>

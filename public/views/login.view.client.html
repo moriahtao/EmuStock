@@ -8,6 +8,11 @@
 
 </nav>
 
+<div ng-show="vm.error"
+     class="alert alert-dismissible alert-danger alertBox" role="alert">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>{{vm.error}}</strong>
+</div>
 <!-- Header -->
 <header class="header-class">
     <div class="container">
@@ -16,26 +21,40 @@
                 <div class="intro-text">
                     <span class="name">EmuStock</span>
                     <span class="skills">How do you like or dislike a stock? Share your own reviews!</span>
-                    <div class="contianer">
+
+                    <form novalidate name="vm.myForm">
+                        <span ng-show="vm.myForm.username.$invalid" class="loginSpan">
+                        <h6>{{vm.alert}}</h6>
+                        </span>
                         <input ng-model="vm.user.username"
+                               name="username"
                                type="text"
                                class="form-control"
-                               placeholder="Username"/>
+                               placeholder="Username"
+                               required/>
+                        <span ng-show="vm.myForm.password.$invalid" class="loginSpan">
+                            <h6>{{vm.alert}}</h6>
+                        </span>
                         <input ng-model="vm.user.password"
+                               name="password"
                                type="password"
                                class="form-control"
-                               placeholder="Password"/>
+                               placeholder="Password"
+                               required/>
                         <br>
 
                         <a ng-click="vm.login()"
                            class="btn btn-info btn-block" type="button">
                             <span><strong>Login</strong></span>
                         </a>
-                        <a href="#{{vm.shared.getRoute('register')}}"
-                           class="btn btn-success btn-block" type="button">
-                            <span><strong>Register</strong></span>
-                        </a>
-                    </div>
+                    </form>
+                    <p></p>
+
+                    <a href="#{{vm.shared.getRoute('register')}}"
+                       class="btn btn-success btn-block" type="button">
+                        <span><strong>Register</strong></span>
+                    </a>
+
                 </div>
             </div>
         </div>

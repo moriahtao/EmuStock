@@ -13,6 +13,15 @@
         vm.user = {};
 
         vm.register = function () {
+            if(vm.myForm.$invalid == true){
+                vm.error = "Please check and resubmit!";
+                vm.alert = "* Required Field";
+                vm.vpsdAlert = "Passwords don't match!";
+            } else if(vm.user.password !== vm.user.verpass){
+                vm.error = "Please check and resubmit!";
+                vm.alert = "* Required Field";
+                vm.vpsdAlert = "Passwords don't match!";
+            }else{
             return UserService.register(vm.user)
                 .then(
                     function () {
@@ -24,5 +33,6 @@
                     }
                 );
         };
+        }
     }
 })();
