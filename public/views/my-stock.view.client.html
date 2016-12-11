@@ -20,16 +20,13 @@
         <tr>
         </thead>
         <tbody>
-            <tr ng-repeat="item in vm.stocks">
-                <td>{{item.quote.Symbol}}</td>
-                <td><a href="#{{vm.shared.getRoute('self_stock_detail', {symbol: stock})}}">{{item.quote.Name}}</a></td>
-                <td ng-if="item.quote.Change < 0" class="text-success">
-                    {{item.quote.LastPrice}}
-                </td>
-                <td ng-if="item.quote.Change > 0" class="text-danger">
-                    {{item.quote.LastPrice}}
-                </td>
-            </tr>
+        <tr ng-repeat="item in vm.stocks">
+            <td>{{item.Symbol}}</td>
+            <td><a href="#{{vm.shared.getRoute('self_stock_detail', {symbol: stock})}}">{{item.Name}}</a></td>
+            <td class="{{(item.Change >= 0) ? 'text-success' : 'text-danger'}}">
+                {{item.LastPrice}}
+            </td>
+        </tr>
         </tbody>
     </table>
 </div>
