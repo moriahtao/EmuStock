@@ -23,4 +23,9 @@ module.exports = function (app, services) {
     app.get('/api/user/:userId/comments', services.comment.findCommentsByUser);
     app.get('/api/comment/stock/:symbol', services.comment.findCommentsBySymbol);
     app.delete('/api/comment/:commentId', services.comment.deleteCommentById);
+
+    // admin only APIs
+    app.all('/api/admin/\*', services.user.authAdmin);
+    app.get('/api/admin/users', services.user.findAllUsers);
+    app.delete('/api/admin/user/:userId', services.user.deleteUser);
 };

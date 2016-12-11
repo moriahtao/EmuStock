@@ -24,6 +24,9 @@ module.exports = function (models) {
         unfollowStock: unfollowStock,
         followUser: followUser,
         unfollowUser: unfollowUser,
+        authAdmin, authAdmin,
+        findAllUsers: findAllUsers,
+        deleteUser: deleteUser,
     };
 
     function serializeUser(user, done) {
@@ -171,6 +174,27 @@ module.exports = function (models) {
         var username = req.query.username;
         models.user.find({username: new RegExp(`.*${username}.*`, 'i')}).then(
             users => res.json(users)
+        );
+    }
+
+    function authAdmin(req, res, next) {
+        if (req.user.isAdmin) {
+            next();
+        } else {
+            res.sendStatus(401);
+        }
+    }
+
+    function findAllUsers(req, res) {
+        models.user.find({isAdmin: false}).then(
+            users => res.json(users)
+        );
+    }
+
+    function deleteUser(req, res) {
+        var userId = req.params.userId;
+        models.user.remove({_id: userId}).then(
+            () => res.sendStatus(200)
         );
     }
 
