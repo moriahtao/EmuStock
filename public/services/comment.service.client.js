@@ -13,53 +13,28 @@
             getCommentById : getCommentById,
             createComment : createComment,
             deleteCommentById : deleteCommentById,
-            findCommentByUserId : findCommentByUserId,
+            getTimelineByUserId : getTimelineByUserId,
             findCommentByStock : findCommentByStock,
         };
 
         function createComment(comment) {
-            $http.post("/api/comment", comment)
-                .then(
-                    function (res) {
-                        return res.data;
-                    }
-                );
+            return $http.post("/api/comment", comment);
         }
 
         function getCommentById(cid) {
-            $http.get("/api/comment/" + cid)
-                .then(
-                    function (res) {
-                        return res.data;
-                    }
-                );
+            return $http.get("/api/comment/" + cid);
         }
 
         function deleteCommentById(cid) {
-            $http.delete("/api/comment/" + cid)
-                .then(
-                    function (res) {
-                        return res.data;
-                    }
-                );
+            return $http.delete("/api/comment/" + cid);
         }
 
         function findCommentByStock(symbol) {
-            $http.get("/api/comment/stock/" + symbol)
-                .then(
-                    function (res) {
-                        return res.data;
-                    }
-                );
+            return $http.get("/api/comment/stock/" + symbol);
         }
 
-        function findCommentByUserId(uid) {
-            $http.get("/api/user/" + uid + "/timeline")
-                .then(
-                    function (res) {
-                        return res.data;
-                    }
-                );
+        function getTimelineByUserId(uid) {
+            return $http.get("/api/user/" + uid + "/timeline");
         }
     }
 })();
