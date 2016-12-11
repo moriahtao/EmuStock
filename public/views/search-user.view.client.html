@@ -1,7 +1,6 @@
 <nav-bar></nav-bar>
 
 <div class="container top">
-
     <h3>Discover friends</h3>
     <div class="form-group">
         <div class="input-group">
@@ -20,7 +19,7 @@
         <tr>
             <td ng-repeat="user in vm.users">
                 <a href="#{{vm.shared.getRoute('user_detail', {o_uid: user._id})}}">
-                    {{user.name}}
+                    {{user.username}}
                 </a>
             </td>
         </tr>

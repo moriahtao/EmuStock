@@ -27,6 +27,7 @@ module.exports = function (models) {
         authAdmin, authAdmin,
         findAllUsers: findAllUsers,
         deleteUser: deleteUser,
+        searchUserByUsername: searchUserByUsername,
     };
 
     function serializeUser(user, done) {
@@ -198,4 +199,10 @@ module.exports = function (models) {
         );
     }
 
+    function searchUserByUsername(req, res) {
+        var username = req.query.username;
+        models.user.find({username: new RegExp(username, 'i')}).then(
+            users => res.json(users)
+        );
+    }
 };

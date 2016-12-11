@@ -12,6 +12,7 @@ module.exports = function (app, services) {
     app.post('/api/user/logout', services.user.logout);
     app.get('/api/user/current', services.user.currentUser);
     app.get('/api/user/:userId', services.user.findUserById);
+    app.get('/api/user/', services.user.searchUserByUsername);
     app.put('/api/user/', services.user.updateUser);
     app.delete('/api/user/', services.user.deleteUser);
     app.get('/api/user/:userId/timeline', services.user.getTimelineByUserId);
