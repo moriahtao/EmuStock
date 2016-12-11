@@ -22,7 +22,7 @@
         <tbody>
         <tr ng-repeat="item in vm.stocks">
             <td>{{item.Symbol}}</td>
-            <td><a href="#{{vm.shared.getRoute('self_stock_detail', {symbol: stock})}}">{{item.Name}}</a></td>
+            <td><a href="#{{vm.shared.getRoute('self_stock_detail', {symbol: item.Symbol})}}">{{item.Name}}</a></td>
             <td class="{{(item.Change >= 0) ? 'text-success' : 'text-danger'}}">
                 {{item.LastPrice}}
             </td>
