@@ -7,7 +7,7 @@
         const vm = this;
         vm.shared = SharedService;
 
-        vm.uid = $routeParams.uid;
+        vm.uid = $routeParams.s_uid;
         vm.stocks = [];
         vm.term = "stock name";
 
