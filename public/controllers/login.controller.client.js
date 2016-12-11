@@ -11,18 +11,19 @@
 
         // login with session enabled
         vm.login = function () {
-            if(vm.myForm.$invalid == true){
+            if (vm.myForm.$invalid == true) {
                 vm.error = "Please check and resubmit!";
                 vm.alert = "* Required Field";
-            }else{
-            UserService.login(vm.user).then(
-                (res) => {
-                    console.log("login succeeded");
-                    var user = res.data;
-                    $location.url(vm.shared.getRoute('profile', {s_uid: user._id}));
-                },
-                () => console.warn("Invalid username password pair")
-            );};
+            } else {
+                UserService.login(vm.user).then(
+                    (res) => {
+                        console.log("login succeeded");
+                        var user = res.data;
+                        $location.url(vm.shared.getRoute('timeline', {s_uid: user._id}));
+                    },
+                    () => console.warn("Invalid username password pair")
+                );
+            }
         }
     }
 })();

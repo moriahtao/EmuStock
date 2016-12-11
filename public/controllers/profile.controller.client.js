@@ -26,6 +26,7 @@
         };
 
         vm.logout = function () {
+            //TODO: apply this to all controllers
             UserService.logout().then(
                 () => {
                     console.log('logout succeeded');
