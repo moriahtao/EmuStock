@@ -17,7 +17,9 @@
             vm.follow = follow;
             vm.unfollow = unfollow;
 
-            vm.stocks = vm.user.stocks;
+            vm.stocks = [];
+
+            quoteStocks();
 
             UserService.findUserById(vm.other_uid)
                 .then(
@@ -26,7 +28,6 @@
                         vm.other.followed = vm.other.followers.filter(x => x._id === vm.self._id).length >= 1;
                     }
                 );
-
         }
 
         // functions
@@ -53,5 +54,14 @@
                     }
                 );
         }
+
+        function quoteStocks() {
+            for (var symbol of vm.user.stocks) {
+                StockService.quote(symbol).then(
+                    res => vm.stocks.push(res.data)
+                )
+            }
+        }
+
     }
 })();
