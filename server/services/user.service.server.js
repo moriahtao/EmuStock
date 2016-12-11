@@ -4,37 +4,9 @@ module.exports = function (models) {
     var LocalStrategy = require('passport-local').Strategy;
     var bcrypt = require("bcrypt-nodejs");
 
-    passport.serializeUser((user, done) => {
-        done(null, user);
-    });
-
-    passport.deserializeUser((user, done) => {
-        models.user.findOne({_id: user._id}).then(
-            user => {
-                done(null, user);
-            },
-            err => {
-                done(err, null);
-            }
-        );
-    });
-
-    passport.use(new LocalStrategy(
-        function (username, password, done) {
-            models.user.findOne({username: username}).then(
-                user => {
-                    if (user && bcrypt.compareSync(password, user.password)) {
-                        return done(null, user);
-                    } else {
-                        return done(null, false);
-                    }
-                },
-                err => {
-                    return done(err);
-                }
-            );
-        }
-    ));
+    passport.serializeUser(serializeUser);
+    passport.deserializeUser(deserializeUser);
+    passport.use(new LocalStrategy(localStrategy));
 
     return {
         auth: auth,
@@ -50,8 +22,39 @@ module.exports = function (models) {
         getTimelineByUserId: getTimelineByUserId,
         followStock: followStock,
         unfollowStock: unfollowStock,
+        followUser: followUser,
+        unfollowUser: unfollowUser,
     };
 
+    function serializeUser(user, done) {
+        done(null, user);
+    }
+
+    function deserializeUser(user, done) {
+        models.user.findOne({_id: user._id}).then(
+            user => {
+                done(null, user);
+            },
+            err => {
+                done(err, null);
+            }
+        );
+    }
+
+    function localStrategy(username, password, done) {
+        models.user.findOne({username: username}).then(
+            user => {
+                if (user && bcrypt.compareSync(password, user.password)) {
+                    return done(null, user);
+                } else {
+                    return done(null, false);
+                }
+            },
+            err => {
+                return done(err);
+            }
+        );
+    }
 
     function auth(req, res, next) {
         if (req.isAuthenticated()) {
@@ -85,7 +88,7 @@ module.exports = function (models) {
 
     function findUserById(req, res) {
         var userId = req.params.userId;
-        models.user.findOne({_id: userId}).then(
+        models.user.findOne({_id: userId}).populate('followings', 'followers').then(
             user => res.json(user)
         );
     }
@@ -134,6 +137,26 @@ module.exports = function (models) {
         var symbol = req.params.symbol;
         models.user.update({_id: userId}, {$pull: {stocks: symbol}}).then(
             () => res.sendStatus(200)
+        );
+    }
+
+    function followUser(req, res) {
+        var userId = req.params.userId;
+        var f_uid = req.params.f_uid;
+        models.user.update({_id: userId}, {$push: {followings: f_uid}}).then(
+            () => models.user.update({_id: f_uid}, {$push: {followers: userId}}).then(
+                () => res.sendStatus(200)
+            )
+        );
+    }
+
+    function unfollowUser(req, res) {
+        var userId = req.params.userId;
+        var f_uid = req.params.f_uid;
+        models.user.update({_id: userId}, {$pull: {followings: f_uid}}).then(
+            () => models.user.update({_id: f_uid}, {$pull: {followers: userId}}).then(
+                () => res.sendStatus(200)
+            )
         );
     }
 

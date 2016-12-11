@@ -35,11 +35,11 @@
         }
 
         function searchUserByUsername(username) {
-            $http.get("/api/user/?username=" + username);
+            $http.get(`/api/user/?username=${username}`);
         }
 
         function findUserById(uid) {
-            return $http.get("/api/user/" + uid);
+            return $http.get(`/api/user/${uid}`);
         }
 
         function currentUser() {
@@ -51,19 +51,19 @@
         }
 
         function followUser(uid, f_uid) {
-            return $http.post("/api/user/" + uid + "/follow/" + f_uid);
+            return $http.post(`/api/user/${uid}/follow/${f_uid}`);
         }
 
         function unfollowUser(uid, f_uid) {
-            return $http.delete("/api/user/" + uid + "/follow/" + f_uid);
+            return $http.delete(`/api/user/${uid}/follow/${f_uid}`);
         }
 
         function followStock(uid, symbol) {
-            return $http.post("/api/user/" + uid + "/stock/" + symbol);
+            return $http.post(`/api/user/${uid}/stock/${symbol}`);
         }
 
         function unfollowStock(uid, symbol) {
-            return $http.delete("/api/user/" + uid + "/stock/" + symbol);
+            return $http.delete(`/api/user/${uid}/stock/${symbol}`);
         }
 
         function getTimelineByUserId(userId) {
