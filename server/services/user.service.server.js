@@ -120,6 +120,7 @@ module.exports = function (models) {
             models.comment
                 .find({user: {$in: user.followings}})
                 .sort({createdAt: -1})
+                .populate('user')
                 .then(getTimeline);
         }
 
