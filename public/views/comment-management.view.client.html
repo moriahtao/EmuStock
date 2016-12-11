@@ -1,18 +1,19 @@
 <nav-bar></nav-bar>
 
 <div class="container top">
-<table class="table table-striped table-hover" ng-if="vm.comments">
+    <h3 align="center">User Comment List</h3>
+    <table class="table table-striped table-hover" ng-if="vm.comments">
     <thead>
     <tr>
-        <th>Comment</th>
-        <th>Operation</th>
+        <th class="adminTb">Comment</th>
+        <th class="adminTb">Operation</th>
     </tr>
     </thead>
     <tbody>
     <tr ng-repeat="comment in vm.comments">
-        <td>{{comment.html}}</td>
-        <td><a ng-click="vm.deleteComment(comment._id)" class="btn btn-primary btn-xs">delete</a></td>
+        <td class="adminTb">{{comment.html}}</td>
+        <td class="adminTb"><a ng-click="vm.deleteComment(comment._id)" class="btn btn-primary btn-xs">delete</a></td>
     </tr>
     </tbody>
-</table>
+    </table>
 </div>

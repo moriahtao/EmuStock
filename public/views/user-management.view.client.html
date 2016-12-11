@@ -2,17 +2,22 @@
 
 
 <div class="container top">
+    <h3 align="center">All User List</h3>
 <table class="table table-striped table-hover" ng-if="vm.users">
-    <thead>
+    <thead >
     <tr>
-        <th>Name</th>
-        <th>Operation</th>
+        <th class="adminTb">Name</th>
+        <th class="adminTb">Operation</th>
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="user in vm.users">
-        <td><a href="#{{vm.shared.getRoute('comment_management', {o_uid: user._id})}}">{{user.username}}</a></td>
-        <td><a ng-click="vm.deleteUser(user._id)" class="btn btn-primary btn-xs">delete</a></td>
+    <tr >
+        <td class="adminTb">aaa</td>
+        <td class="adminTb"><a class="btn btn-primary btn-xs">delete</a></td>
+    </tr>
+    <tr >
+        <td class="adminTb">{{user.username}}</td>
+        <td class="adminTb"><a class="btn btn-primary btn-xs">delete</a></td>
     </tr>
     </tbody>
 </table>

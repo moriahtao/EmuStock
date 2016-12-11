@@ -10,3 +10,6 @@ input.ng-invalid{
 .stockChart {
     width: 100%;
 }
+.adminTb {
+    text-align:center;
+}
