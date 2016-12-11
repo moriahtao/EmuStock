@@ -79,8 +79,17 @@
 
         // reformat raw data for chart plotting
         function generateData(rawData) {
-            console.warn(rawData);
-            return [];
+            var data = [];
+            for (var i = 0; i < rawData.Dates.length; i++) {
+                data.push([
+                    Date.parse(rawData.Dates[i]),
+                    rawData.Elements[0].DataSeries.open.values[i],
+                    rawData.Elements[0].DataSeries.high.values[i],
+                    rawData.Elements[0].DataSeries.low.values[i],
+                    rawData.Elements[0].DataSeries.close.values[i],
+                ]);
+            }
+            return data;
         }
 
         function follow() {
