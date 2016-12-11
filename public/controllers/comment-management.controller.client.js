@@ -18,18 +18,19 @@
         vm.shared.initController(vm, init);
 
         function init() {
-            CommentService.findCommentByUserId($routeParams.uid)
-                .then( res =>{ vm.comments = res.data; } );
-            vm.delete = deleteComment;
+            CommentService.findCommentByUserId($routeParams.o_uid).then(
+                res => vm.comments = res.data
+            );
+            vm.deleteComment = deleteComment;
         }
 
-        function deleteComment(c_id){
-            CommentService.delete(c_id)
+        function deleteComment(c_id) {
+            CommentService.deleteCommentById(c_id)
                 .then(
-                    ()=>{
+                    () => {
                         vm.comments = vm.comments.filter((x) => x._id != c_id);
                     },
-                    err=>{
+                    err => {
                         alert("operation failed:" + err);
                     }
                 )

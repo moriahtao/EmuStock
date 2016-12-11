@@ -30,12 +30,12 @@
 
             // admin
             user_management : {
-                route: '/admin/:adminid/users',
+                route: '/admin/:s_uid/users',
                 view: 'views/user-management.view.client.html',
                 controller: 'UserManagementController'
             },
             comment_management : {
-                route: '/admin/:adminid/user/:uid/comments',
+                route: '/admin/:s_uid/user/:o_uid/comments',
                 view: 'views/comment-management.view.client.html',
                 controller: 'CommentManagementController'
             },

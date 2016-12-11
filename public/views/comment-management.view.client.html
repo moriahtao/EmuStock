@@ -10,7 +10,7 @@
     <tbody>
     <tr ng-repeat="comment in vm.comments">
         <td>{{comment.html}}</td>
-        <td><a ng-click="vm.delete(comment)" class="btn btn-primary btn-xs">delete</a></td>
+        <td><a ng-click="vm.deleteComment(comment._id)" class="btn btn-primary btn-xs">delete</a></td>
     </tr>
     </tbody>
 </table>

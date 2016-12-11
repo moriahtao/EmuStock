@@ -22,7 +22,7 @@
                         if (!user.isAdmin){
                             $location.url(vm.shared.getRoute('timeline', {s_uid: user._id}));
                         } else {
-                            $location.url(vm.shared.getRoute('user_management', {adminid: user._id}));
+                            $location.url(vm.shared.getRoute('user_management', {s_uid: user._id}));
                         }
 
                     },

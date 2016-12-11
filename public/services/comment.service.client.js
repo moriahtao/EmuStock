@@ -15,6 +15,7 @@
             deleteCommentById : deleteCommentById,
             getTimelineByUserId : getTimelineByUserId,
             findCommentByStock : findCommentByStock,
+            findCommentByUserId: findCommentByUserId,
         };
 
         function createComment(comment) {
@@ -35,6 +36,10 @@
 
         function getTimelineByUserId(uid) {
             return $http.get("/api/user/" + uid + "/timeline");
+        }
+
+        function findCommentByUserId(uid) {
+            return $http.get(`/api/user/${uid}/comments`);
         }
     }
 })();

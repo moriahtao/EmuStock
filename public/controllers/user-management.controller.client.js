@@ -13,19 +13,26 @@
         .controller('UserManagementController', UserManagementController);
 
     function UserManagementController(SharedService, UserService) {
+        const vm = this;
         vm.shared = SharedService;
         vm.shared.initController(vm, init);
 
-        function init(){
-            vm.users = UserService.getAllUsers();
-            vm.delete = deleteUser;
+        function init() {
+            vm.users = [];
+            vm.deleteUser = deleteUser;
+
+            UserService.getAllUsers().then(
+                res => vm.users = res.data
+            );
         }
 
-        function deleteUser(){
+        function deleteUser(uid) {
             UserService.deleteUser(uid)
                 .then(
                     () => vm.users = vm.users.filter((x) => x._id != uid),
-                    (err) => {alert("operation failed:" + err);}
+                    (err) => {
+                        alert("operation failed:" + err);
+                    }
                 );
         }
     }
