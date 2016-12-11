@@ -94,7 +94,7 @@ module.exports = function (models) {
     }
 
     function updateUser(req, res) {
-        var userId = req.user._id;
+        var userId = req.body._id;
         var user = req.body;
         models.user.update({_id: userId}, user).then(
             () => res.sendStatus(200)
