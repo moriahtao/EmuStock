@@ -39,14 +39,42 @@
         StockService.quote(vm.stock.symbol)
             .then(
                 function(res) {
-                    vm.stock.quote = res;
+                    vm.stock.quote = res.data;
+                    console.log(vm.stock.quote);
                 }
             );
 
         StockService.chart(vm.stock.symbol)
             .then(
                 function(res) {
-                    vm.stock.chart = res;
+                    vm.stock.chart = res.data;
+                    var points = [];
+                    for (var i = 0; i < vm.stock.chart.Dates.length; i++) {
+                        points.push([
+                            Date.parse(vm.stock.chart.Dates[i]),
+                            vm.stock.chart.Elements[0].DataSeries.close.values[i],
+                        ]);
+                    }
+                    $('#stock-chart').highcharts('StockChart', {
+
+                        rangeSelector: {
+                            selected: 1
+                        },
+
+                        title: {
+                            text: 'AAPL Stock Price'
+                        },
+
+                        series: [
+                            {
+                                name: 'AAPL',
+                                data: points,
+                                tooltip: {
+                                    valueDecimals: 2
+                                },
+                            },
+                        ]
+                    });
                 }
             );
 
