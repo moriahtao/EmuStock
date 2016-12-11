@@ -14,10 +14,6 @@
         </thead>
         <tbody>
         <tr>
-            <td>Current Time</td>
-            <td>{{vm.stock.quote.TimeStamp}}</td>
-        </tr>
-        <tr>
             <td>Symbol</td>
             <td>{{vm.stock.quote.Symbol}}</td>
         </tr>
@@ -31,7 +27,7 @@
         </tr>
         <tr>
             <td>Change Percent</td>
-            <td>{{vm.stock.quote.ChangePercent}}</td>
+            <td>{{vm.stock.quote.ChangePercent | number: 2}}%</td>
         </tr>
         </tbody>
     </table>
@@ -52,7 +48,7 @@
     </p>
     <!--create my comment-->
     <br>
-    <div class="panel panel-primary">
+    <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">Leave a comment</h3>
         </div>
