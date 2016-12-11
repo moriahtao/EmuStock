@@ -1,0 +1,16 @@
+<nav-bar></nav-bar>
+
+<table class="table table-striped table-hover" ng-if="vm.comments">
+    <thead>
+    <tr>
+        <th>Comment</th>
+        <th>Operation</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="comment in vm.comments">
+        <td>{{comment.html}}</td>
+        <td><a ng-click="vm.delete(comment)" class="btn btn-primary btn-xs">delete</a></td>
+    </tr>
+    </tbody>
+</table>
