@@ -3,20 +3,24 @@
         .module('EmuStock')
         .controller('StockDetailController', StockDetailController);
 
-    function StockDetailController($routeParams, SharedService, UserService, StockService, CommentService) {
+    function StockDetailController($routeParams, $route, SharedService, UserService, StockService, CommentService) {
         const vm = this;
         vm.shared = SharedService;
 
-        vm.uid = $routeParams.uid;
-        vm.stock = {symbol : $routeParams.symbol, followed : false};
+        vm.uid = $routeParams.s_uid;
+        vm.stock = {symbol: $routeParams.symbol, followed: false};
         vm.term = "stock name";
-        vm.comment = "";
+        vm.comment = {
+            html: "",
+            user: vm.uid,
+            stock: vm.stock.symbol,
+        };
         vm.comments = null;
 
         // get all comments for stock
         CommentService.findCommentByStock(vm.stock.symbol)
             .then(
-                function(res){
+                function (res) {
                     vm.comments = res.data;
                 }
             );
@@ -24,12 +28,12 @@
         // get user profile to know whether this stock is followed
         UserService.findUserById(vm.uid)
             .then(
-                function(res){
+                function (res) {
                     let user = res.data;
-                    for(let i=0; i<user.stocks; i++){
-                        if(vm.stock.symbol == user.stocks[i]) {
+                    for (let i = 0; i < user.stocks; i++) {
+                        if (vm.stock.symbol == user.stocks[i]) {
                             vm.stock.followed = true;
-                            break
+                            break;
                         }
                     }
                 }
@@ -38,15 +42,14 @@
         // get stock details
         StockService.quote(vm.stock.symbol)
             .then(
-                function(res) {
+                function (res) {
                     vm.stock.quote = res.data;
-                    console.log(vm.stock.quote);
                 }
             );
 
         StockService.chart(vm.stock.symbol)
             .then(
-                function(res) {
+                function (res) {
                     vm.stock.chart = res.data;
                     var points = [];
                     for (var i = 0; i < vm.stock.chart.Dates.length; i++) {
@@ -78,36 +81,38 @@
                 }
             );
 
-        vm.follow = function() {
+        vm.follow = function () {
             UserService.followStock(vm.uid, vm.stock.symbol)
                 .then(
-                    function() {
+                    function () {
                         console.log("follow success.");
                     },
-                    function() {
+                    function () {
                         console.warn("follow failed. try again later");
                     }
                 );
         };
 
-        vm.unfollow = function() {
+        vm.unfollow = function () {
             UserService.unfollowStock(vm.uid, vm.stock.symbol)
                 .then(
-                    function() {
+                    function () {
                         console.log("unfollow success.");
                         if (vm.stocks) {
-                            vm.stocks = vm.stocks.filter(function(x){return x.symbol != vm.stock.symbol;});
+                            vm.stocks = vm.stocks.filter(function (x) {
+                                return x.symbol != vm.stock.symbol;
+                            });
                         }
                     }
                 );
         };
 
-        vm.createComment = function() {
+        vm.createComment = function () {
             CommentService.createComment(vm.comment)
                 .then(
                     function (res) {
-                        // todo : add comment to current comemnt list
-                        // or refresh page
+                        // todo : add comment to current comment list or refresh page
+                        $route.reload();
                     }
                 );
         }
