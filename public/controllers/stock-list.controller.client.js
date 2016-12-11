@@ -9,7 +9,7 @@
         vm.shared.initController(vm, init);
 
         function init() {
-            vm.stocks = vm.user.stocks;
+            vm.stocks = [];
             vm.input = "";
             vm.search = search;
 
@@ -18,15 +18,10 @@
 
 
         function quoteStocks() {
-            for (var i = 0; i < vm.stocks.length; i++) {
-                StockService.quote(vm.stocks[i])
-                    .then(
-                        function (res) {
-                            var symbol = vm.stocks[i];
-                            vm.stocks[i] = {symbol: symbol, quote: res.data};
-                            console.log(res.data);
-                        }
-                    )
+            for (var symbol of vm.user.stocks) {
+                StockService.quote(symbol).then(
+                    res => vm.stocks.push(res.data)
+                )
             }
         }
 

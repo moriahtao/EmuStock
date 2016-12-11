@@ -14,10 +14,6 @@
         </thead>
         <tbody>
         <tr>
-            <td>Current Time</td>
-            <td>{{vm.stock.quote.TimeStamp}}</td>
-        </tr>
-        <tr>
             <td>Symbol</td>
             <td>{{vm.stock.quote.Symbol}}</td>
         </tr>
@@ -31,7 +27,7 @@
         </tr>
         <tr>
             <td>Change Percent</td>
-            <td>{{vm.stock.quote.ChangePercent}}</td>
+            <td>{{vm.stock.quote.ChangePercent | number: 2}}%</td>
         </tr>
         </tbody>
     </table>
@@ -52,7 +48,7 @@
     </p>
     <!--create my comment-->
     <br>
-    <div class="panel panel-primary">
+    <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">Leave a comment</h3>
         </div>
@@ -70,7 +66,11 @@
     <!--comment list-->
     <div ng-repeat="comment in vm.comments">
         <p>{{comment.html}}</p>
-        <small>{{comment.user.username}} <cite title="Source Title">posted on {{comment.createdAt}}</cite>
+        <small>
+            <a href="#{{vm.shared.getRoute('user_detail', {o_uid: comment.user._id})}}">
+            {{comment.user.username}}
+        </a>
+            <cite title="Source Title">posted on {{comment.createdAt}}</cite>
         </small>
     </div>
 
