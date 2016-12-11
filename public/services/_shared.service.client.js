@@ -51,6 +51,11 @@
             },
 
             // stocks
+            stock_search: {
+                route: '/self/:s_uid/stock/search',
+                view: 'views/stock-search.view.client.html',
+                controller: 'StockSearchController'
+            },
             self_stock_detail: {
                 route: '/self/:s_uid/stock/:symbol',
                 view: 'views/stock-detail.view.client.html',
