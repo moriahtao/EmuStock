@@ -52,5 +52,14 @@
                     }
                 );
         }
+
+        function findCommentByUserId(uid) {
+            $http.get("/api/user/" + uid + "/timeline")
+                .then(
+                    function (res) {
+                        return res.data;
+                    }
+                );
+        }
     }
 })();
