@@ -4,7 +4,7 @@
         .controller('ProfileController', ProfileController);
 
     function ProfileController($location, $routeParams, SharedService, UserService) {
-        var vm = this;
+        const vm = this;
         vm.shared = SharedService;
 
         vm.user = {};

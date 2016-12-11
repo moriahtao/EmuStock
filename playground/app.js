@@ -43,7 +43,7 @@
     }
 
     function PlaygroundAppController(StockService) {
-        var vm = this;
+        const vm = this;
 
         vm.lookup = lookup;
         vm.quote = quote;

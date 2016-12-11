@@ -4,7 +4,7 @@
         .controller('UserDetailController', UserDetailController);
 
     function UserDetailController($routeParams, SharedService, UserService) {
-        var vm = this;
+        const vm = this;
         vm.shared = SharedService;
 
         vm.self_uid = $routeParams.self_uid;

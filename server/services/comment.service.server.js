@@ -4,6 +4,7 @@ module.exports = function (models) {
         createComment: createComment,
         findCommentsByUser: findCommentsByUser,
         findCommentsBySymbol: findCommentsBySymbol,
+        deleteCommentById: deleteCommentById,
     };
 
     function createComment(req, res) {
@@ -24,6 +25,13 @@ module.exports = function (models) {
         const symbol = req.query.symbol;
         models.comment.find({stock: symbol}).then(
             comments => res.json(comments)
+        );
+    }
+
+    function deleteCommentById(req, res) {
+        const commentId = req.params.commentId;
+        models.comment.remove({_id: commentId}).then(
+            () => res.sendStatus(200)
         );
     }
 };

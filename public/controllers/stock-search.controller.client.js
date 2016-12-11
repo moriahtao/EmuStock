@@ -7,7 +7,7 @@
         .controller('StockSearchController', StockSearchController);
 
     function StockSearchController($routeParams, SharedService, StockService) {
-        var vm = this;
+        const vm = this;
         vm.shared = SharedService;
 
         vm.uid = $routeParams.uid;

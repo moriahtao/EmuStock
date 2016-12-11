@@ -4,7 +4,7 @@
         .controller('LoginController', LoginController);
 
     function LoginController($location, SharedService, UserService) {
-        var vm = this;
+        const vm = this;
         vm.shared = SharedService;
 
         vm.user = {};

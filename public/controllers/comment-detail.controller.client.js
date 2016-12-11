@@ -4,7 +4,7 @@
         .controller('CommentDetailController', CommentDetailController);
 
     function CommentDetailController($routeParams, SharedService, CommentService) {
-        var vm = this;
+        const vm = this;
         vm.shared = SharedService;
         vm.comment_id = $routeParams.cid;
         vm.main_comment = null;

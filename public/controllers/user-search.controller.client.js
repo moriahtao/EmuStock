@@ -7,7 +7,7 @@
         .controller('UserListController', UserListController);
 
     function UserListController($routeParams, SharedService, UserService) {
-        var vm = this;
+        const vm = this;
         vm.shared = SharedService;
 
         vm.uid = $routeParams.uid;

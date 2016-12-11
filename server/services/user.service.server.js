@@ -44,6 +44,7 @@ module.exports = function (models) {
         register: register,
         findUserById: findUserById,
         findUserByUsername: findUserByUsername,
+        searchUsersByUsername: searchUsersByUsername,
         updateUser: updateUser,
         deleteUser: deleteUser,
         getTimelineByUserId: getTimelineByUserId,
@@ -122,6 +123,13 @@ module.exports = function (models) {
         const username = req.query.username;
         models.user.findOne({username: username}).then(
             user => res.json(user)
+        );
+    }
+
+    function searchUsersByUsername(req, res) {
+        const username = req.query.username;
+        models.user.find({username: new RegExp(`.*${username}.*`, 'i')}).then(
+            users => res.json(users)
         );
     }
 

@@ -13,7 +13,7 @@
         .controller('CommentListController', CommentListController);
 
     function CommentListController($routeParams, $location, SharedService, CommentService) {
-        var vm = this;
+        const vm = this;
         vm.shared = SharedService;
         vm.comments = [{
             stockName: 'APPL',
@@ -35,14 +35,14 @@
                     }
                 );
         } else if ($routeParams.symbol !== undefined) {
-            var symbol = $routeParams.symbol;
+            let symbol = $routeParams.symbol;
             CommentService.findCommentByStock(symbol).then(
                 function (res) {
                     vm.comments = res.data;
                 }
             );
         } else {
-            var uid;
+            let uid;
             if ($routeParams.o_uid !== undefined) {
                 uid = $routeParams.o_uid;
             } else if ($routeParams.s_uid !== undefined) {
