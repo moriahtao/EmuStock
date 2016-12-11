@@ -3,7 +3,7 @@
         .module('EmuStock')
         .controller('UserDetailController', UserDetailController);
 
-    function UserDetailController($routeParams, SharedService, UserService) {
+    function UserDetailController($routeParams, SharedService, UserService, StockService) {
         const vm = this;
         vm.shared = SharedService;
         vm.shared.initController(vm, init);
