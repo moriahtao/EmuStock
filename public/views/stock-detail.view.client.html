@@ -68,10 +68,10 @@
             <legend>Leave a comment</legend>
             <div class="form-group">
                 <div class="col-lg-10">
-                    <textarea class="form-control" rows="5" id="textArea"></textarea>
+                    <textarea ng-model="vm.comment" class="form-control" rows="5" id="textArea"></textarea>
                     <span class="help-block">Share your reviews towards this stock!</span>
                     <a class="btn btn-primary btn-block col-lg-2"
-                       ng-click="vm.createComment(vm.myComment)">Post</a>
+                       ng-click="vm.createComment()">Post</a>
                 </div>
             </div>
         </fieldset>

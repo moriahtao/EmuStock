@@ -10,7 +10,7 @@
         vm.uid = $routeParams.uid;
         vm.stock = {symbol : $routeParams.symbol, followed : false};
         vm.term = "stock name";
-        vm.comment = {};
+        vm.comment = "";
         vm.comments = null;
 
         // get all comments for stock
