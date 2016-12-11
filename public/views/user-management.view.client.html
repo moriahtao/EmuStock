@@ -9,7 +9,7 @@
     </thead>
     <tbody>
     <tr ng-repeat="user in vm.users">
-        <td><a href="#{{vm.shared.getRoute('admin_comment', {o_uid: user._id})}}">{{user.username}}</a></td>
+        <td><a href="#{{vm.shared.getRoute('comment_management', {o_uid: user._id})}}">{{user.username}}</a></td>
         <td><a ng-click="vm.delete(user)" class="btn btn-primary btn-xs">delete</a></td>
     </tr>
     </tbody>
