@@ -1,0 +1,26 @@
+<nav-bar></nav-bar>
+
+<!--TODO: The binding name is not sure-->
+<div class="container top">
+    <table class="table table-striped table-hover" ng-if="vm.result">
+        <thead>
+        <tr>
+            <th>Symbol</th>
+            <th>Name</th>
+            <th>Exchange</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in vm.result">
+            <td>{{item.Symbol}}</td>
+            <td><a ng-click="vm.quote(item.Symbol)">{{item.Name}}</a></td>
+            <td>{{item.Exchange}}</td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="3">Total Results: {{vm.result.length}}</td>
+        </tr>
+        </tfoot>
+    </table>
+</div>
