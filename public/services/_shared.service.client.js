@@ -28,6 +28,18 @@
                 controller: 'UserDetailController',
             },
 
+            // admin
+            user_management : {
+                route: '/admin/:adminid/users',
+                view: 'views/user-management.view.client.html',
+                controller: 'UserManagementController'
+            },
+            comment_management : {
+                route: '/admin/:adminid/user/:uid/comments',
+                view: 'views/comment-management.view.client.html',
+                controller: 'CommentManagementController'
+            },
+
             // users
             search_user: {
                 route: '/self/:s_uid/search_user',

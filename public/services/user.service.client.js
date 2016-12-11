@@ -34,6 +34,10 @@
             return $http.post('/api/user/register', user);
         }
 
+        function getAllUsers() {
+            return $http.get(`/api/user/`);
+        }
+
         function searchUserByUsername(username) {
             $http.get(`/api/user/?username=${username}`);
         }
