@@ -19,12 +19,7 @@
                     (res) => {
                         console.log("login succeeded");
                         var user = res.data;
-                        if (!user.isAdmin){
-                            $location.url(vm.shared.getRoute('timeline', {s_uid: user._id}));
-                        } else {
-                            $location.url(vm.shared.getRoute('user_management', {s_uid: user._id}));
-                        }
-
+                        $location.url(vm.shared.getRoute('self_stocks', {s_uid: user._id}));
                     },
                     () => vm.error = "Invalid username password pair"
                 );
