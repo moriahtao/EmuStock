@@ -12,6 +12,7 @@ module.exports = function (db) {
             phone: String,
             followings: [{type: db.Schema.ObjectId, ref: 'UserModel'}],
             followers: [{type: db.Schema.ObjectId, ref: 'UserModel'}],
+            stocks: [String],
             facebook: {
                 id: String,
                 token: String

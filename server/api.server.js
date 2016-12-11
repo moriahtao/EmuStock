@@ -15,6 +15,8 @@ module.exports = function (app, services) {
     app.put('/api/user/update', services.user.updateUser);
     app.delete('/api/user/delete', services.user.deleteUser);
     app.get('/api/user/:userId/timeline', services.user.getTimelineByUserId);
+    app.post('/api/user/:userId/stock/:symbol', services.user.followStock);
+    app.delete('/api/user/:userId/stock/:symbol', services.user.unfollowStock);
     app.post('/api/comment', services.comment.createComment);
     app.get('/api/user/:userId/comments', services.comment.findCommentsByUser);
     app.get('/api/comment/stock/:symbol', services.comment.findCommentsBySymbol);
