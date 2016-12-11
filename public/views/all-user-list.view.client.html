@@ -3,17 +3,20 @@
 <div class="container top">
 
     <h3>Discover friends</h3>
-        <ul class="list-group">
-            <li ng-repeat="user in vm.users" class="list-group-item">
+    <table class="table table-striped table-hover ">
+        <thead>
+        <tr>
+            <th>Name</th>
+        </thead>
+        <tbody>
+        <tr>
+            <td ng-repeat="user in vm.users">
                 <a href="{{vm.shared.getRoute('')}}">
                     {{user.name}}
                 </a>
-                <!--use modal to show the chart of a stock-->
-                <!-- Trigger the modal with a glyphicon -->
-                <!-- <span class="glyphicon glyphicon-eye-open pull-right" data-toggle="modal" data-target="#myModal"></span>-->
-            </li>
-        </ul>
-
-
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 

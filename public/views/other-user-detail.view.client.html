@@ -6,13 +6,26 @@
         <h3>{{vm.user.username}}</h3>
 
         <!--show this user's list of stocks-->
-        <ul class="nav nav-pills nav-stacked">
-            <li ng-repeat="stock in vm.stocks" >
-                <a href="{{vm.shared.getRoute('self_stock_detail')}}">
-                    {{stock.name}}
-                </a>
-            </li>
-        </ul>
+        <table class="table table-striped table-hover ">
+            <thead>
+            <tr>
+                <th>Stock Symbol</th>
+                <th>Stock Name</th>
+                <th>Last Price</th>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in vm.stocks">
+                <td>{{item.Symbol}}</td>
+                <td><a href="#{{vm.shared.getRoute('self_stock_detail', {symbol: stock})}}">{{item.Name}}</a></td>
+                <td ng-if="item.quote.LastPrice < 0" class="text-success">
+                    {{item.quote.LastPrice}}
+                </td>
+                <td ng-if="item.quote.LastPrice > 0" class="text-danger">
+                    {{item.quote.LastPrice}}
+                </td>
+            </tr>
+            </tbody>
+        </table>
         <!--show the button to follow/unfollow this user-->
         <br>
         <p>
