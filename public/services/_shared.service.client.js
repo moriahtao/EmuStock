@@ -24,8 +24,8 @@
             },
             user_detail: {
                 route: '/self/:s_uid/other/:o_uid',
-                view: 'views/profile.view.client.html',
-                controller: 'ProfileController',
+                view: 'views/other-user-detail.view.client.html',
+                controller: 'UserDetailController',
             },
 
             // users

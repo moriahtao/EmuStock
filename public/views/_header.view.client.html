@@ -22,9 +22,6 @@
         <div class="navbar-collapse" ng-class="{collapse: isCollapsed}">
             <ul class="nav navbar-nav navbar-right">
 
-                <li class="page-scroll">
-                    <a href="#{{vm.shared.getRoute('profile')}}">Profile</a>
-                </li>
 
                 <li class="page-scroll">
                     <a href="#{{vm.shared.getRoute('timeline')}}">TimeLine</a>
@@ -42,6 +39,9 @@
                         <li><a href="#{{vm.shared.getRoute('self_follower')}}">My follower</a></li>
                         <li><a href="#{{vm.shared.getRoute('self_following')}}">My following</a></li>
                     </ul>
+                </li>
+                <li class="page-scroll">
+                    <a href="#{{vm.shared.getRoute('profile')}}">Profile</a>
                 </li>
                 <li class="page-scroll">
                     <a ng-click="vm.logout()"><span class="fa fa-sign-out"></span>Logout</a>

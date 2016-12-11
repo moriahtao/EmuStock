@@ -1,11 +1,11 @@
 <nav-bar></nav-bar>
 <div class="container top">
 
-    <h3>Follower</h3>
+    <h3>Following</h3>
     <ul class="list-group">
-        <li ng-repeat="follower in vm.users" class="list-group-item">
-            <a href="{{vm.shared.getRoute('')}}">
-                {{follower.name}}
+        <li ng-repeat="following in vm.user.followings" class="list-group-item">
+            <a href="#{{vm.shared.getRoute('user_detail', {o_uid: following._id})}}">
+                {{following.username}}
             </a>
         </li>
     </ul>

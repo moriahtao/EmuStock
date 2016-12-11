@@ -88,7 +88,7 @@ module.exports = function (models) {
 
     function findUserById(req, res) {
         var userId = req.params.userId;
-        models.user.findOne({_id: userId}).populate('followings', 'followers').then(
+        models.user.findOne({_id: userId}).populate('followings').populate('followers').then(
             user => res.json(user)
         );
     }

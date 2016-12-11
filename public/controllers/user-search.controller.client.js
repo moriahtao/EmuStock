@@ -4,9 +4,9 @@
 (function () {
     angular
         .module('EmuStock')
-        .controller('UserListController', UserListController);
+        .controller('UserSearchController', UserSearchController);
 
-    function UserListController($routeParams, SharedService, UserService) {
+    function UserSearchController($routeParams, SharedService, UserService) {
         const vm = this;
         vm.shared = SharedService;
 

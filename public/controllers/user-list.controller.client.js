@@ -17,20 +17,11 @@
         vm.shared = SharedService;
 
         vm.uid = $routeParams.s_uid;
-        vm.users = [];
+        vm.user = {};
 
-        var path = $location.path();
         // initialization : get user profile to know whether this stock is followed
-        UserService.findUserById(vm.uid)
-            .then(
-                function(res){
-                    if (path.include("followings")) {
-                        vm.users = res.data.followings;
-                    }
-                    if (path.include("followers")) {
-                        vm.users = res.data.followers;
-                    }
-                }
-            );
+        UserService.findUserById(vm.uid).then(
+            res => vm.user = res.data
+        );
     }
 })();

@@ -3,9 +3,9 @@
 
     <h3>Follower</h3>
     <ul class="list-group">
-        <li ng-repeat="follower in vm.users" class="list-group-item">
-            <a href="{{vm.shared.getRoute('')}}">
-                {{follower.name}}
+        <li ng-repeat="follower in vm.user.followers" class="list-group-item">
+            <a href="#{{vm.shared.getRoute('user_detail', {o_uid: follower._id})}}">
+                {{follower.username}}
             </a>
         </li>
     </ul>
