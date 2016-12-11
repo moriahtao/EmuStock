@@ -11,17 +11,17 @@
         vm.shared = SharedService;
 
         vm.uid = $routeParams.uid;
-        vm.stocks = [];
+        vm.results = [];
         vm.stock = {};
-        vm.term = "stock name";
+        vm.input = "";
 
-        vm.search = function() {
-            StockService.lookup(vm.term)
+        vm.search = function () {
+            StockService.lookup(vm.input)
                 .then(
-                    function(res) {
-                        vm.stocks = res.data;
+                    function (res) {
+                        vm.results = res.data;
                     }
-                )
+                );
         };
     }
 })();

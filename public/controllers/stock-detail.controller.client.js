@@ -3,7 +3,7 @@
         .module('EmuStock')
         .controller('StockDetailController', StockDetailController);
 
-    function StockDetailController($routeParams, SharedService, StockService, CommentService) {
+    function StockDetailController($routeParams, SharedService, UserService, StockService, CommentService) {
         const vm = this;
         vm.shared = SharedService;
 
