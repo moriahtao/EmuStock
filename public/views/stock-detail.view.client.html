@@ -38,13 +38,13 @@
 
     <!--FOLLOW THE STOCK-->
     <p>
-        <a ng-if="!vm.followed"
+        <a ng-if="!vm.stock.followed"
            ng-click="vm.follow()"
            class="btn btn-success btn-block">
             <span class="fa fa fa-heart"></span>Add to my list
         </a>
 
-        <a ng-if="vm.followed"
+        <a ng-if="vm.stock.followed"
            ng-click="vm.unfollow()"
            class="btn btn-danger btn-block">
             <span class="fa fa fa-trash"></span>Remove from my list
