@@ -11,7 +11,7 @@
         function init() {
             vm.stock = {
                 symbol: $routeParams.symbol,
-                followed: vm.user.stocks.indexOf(vm.stock.symbol) !== -1,
+                followed: vm.user.stocks.indexOf($routeParams.symbol) !== -1,
             };
 
             vm.comment = {
@@ -49,36 +49,38 @@
         function plotChart() {
             StockService.chart(vm.stock.symbol).then(
                 function (res) {
-                    vm.stock.chart = res.data;
-                    var points = [];
-                    for (var i = 0; i < vm.stock.chart.Dates.length; i++) {
-                        points.push([
-                            Date.parse(vm.stock.chart.Dates[i]),
-                            vm.stock.chart.Elements[0].DataSeries.close.values[i],
-                        ]);
-                    }
                     $('#stock-chart').highcharts('StockChart', {
-
                         rangeSelector: {
                             selected: 1
                         },
-
                         title: {
                             text: `${vm.stock.symbol} Stock Price`
                         },
-
-                        series: [
-                            {
-                                name: vm.stock.symbol,
-                                data: points,
-                                tooltip: {
-                                    valueDecimals: 2
-                                },
-                            },
-                        ],
+                        series: [{
+                            type: 'candlestick',
+                            name: `${vm.stock.symbol} Stock Price`,
+                            data: generateData(res.data),
+                            dataGrouping: {
+                                units: [
+                                    [
+                                        'week', // unit name
+                                        [1] // allowed multiples
+                                    ], [
+                                        'month',
+                                        [1, 2, 3, 4, 6]
+                                    ]
+                                ],
+                            }
+                        }],
                     });
                 }
             );
+        }
+
+        // reformat raw data for chart plotting
+        function generateData(rawData) {
+            console.warn(rawData);
+            return [];
         }
 
         function follow() {

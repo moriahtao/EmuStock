@@ -27,8 +27,9 @@
         function chart(symbol) {
             var chartReq = JSON.stringify({
                 Normalized: false,
-                NumberOfDays: 30,
-                DataPeriod: 'Day',
+                NumberOfDays: 5,
+                DataPeriod: 'Minute',
+                DataInterval: 5,
                 Elements: [
                     {
                         Symbol: symbol,
