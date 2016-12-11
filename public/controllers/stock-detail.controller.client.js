@@ -9,7 +9,6 @@
 
         vm.uid = $routeParams.s_uid;
         vm.stock = {symbol: $routeParams.symbol, followed: false};
-        vm.term = "stock name";
         vm.comment = {
             html: "",
             user: vm.uid,
@@ -30,12 +29,7 @@
             .then(
                 function (res) {
                     let user = res.data;
-                    for (let i = 0; i < user.stocks; i++) {
-                        if (vm.stock.symbol == user.stocks[i]) {
-                            vm.stock.followed = true;
-                            break;
-                        }
-                    }
+                    vm.stock.followed = user.stocks.indexOf(vm.stock.symbol) !== -1;
                 }
             );
 
@@ -65,18 +59,18 @@
                         },
 
                         title: {
-                            text: 'AAPL Stock Price'
+                            text: `${vm.stock.symbol} Stock Price`
                         },
 
                         series: [
                             {
-                                name: 'AAPL',
+                                name: vm.stock.symbol,
                                 data: points,
                                 tooltip: {
                                     valueDecimals: 2
                                 },
                             },
-                        ]
+                        ],
                     });
                 }
             );
@@ -86,6 +80,7 @@
                 .then(
                     function () {
                         console.log("follow success.");
+                        vm.stock.followed = true;
                     },
                     function () {
                         console.warn("follow failed. try again later");
@@ -98,11 +93,7 @@
                 .then(
                     function () {
                         console.log("unfollow success.");
-                        if (vm.stocks) {
-                            vm.stocks = vm.stocks.filter(function (x) {
-                                return x.symbol != vm.stock.symbol;
-                            });
-                        }
+                        vm.stock.followed = false;
                     }
                 );
         };

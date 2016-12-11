@@ -9,7 +9,6 @@
 
         vm.uid = $routeParams.s_uid;
         vm.stocks = [];
-        vm.term = "stock name";
 
         UserService.findUserById(vm.uid)
             .then(
