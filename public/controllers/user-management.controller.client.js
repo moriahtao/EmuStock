@@ -19,15 +19,14 @@
         function init(){
             vm.users = UserService.getAllUsers();
             vm.delete = deleteUser;
-        };
+        }
 
         function deleteUser(){
-            UserService.delete(uid)
+            UserService.deleteUser(uid)
                 .then(
                     () => vm.users = vm.users.filter((x) => x._id != uid),
                     (err) => {alert("operation failed:" + err);}
                 );
         }
-
     }
 })();

@@ -20,6 +20,9 @@
             login: login,
             logout: logout,
             getTimelineByUserId: getTimelineByUserId,
+
+            getAllUsers : getAllUsers,
+            deleteUser : deleteUser
         };
 
         function login(user) {
@@ -32,10 +35,6 @@
 
         function register(user) {
             return $http.post('/api/user/register', user);
-        }
-
-        function getAllUsers() {
-            return $http.get(`/api/user/`);
         }
 
         function searchUserByUsername(username) {
@@ -72,6 +71,15 @@
 
         function getTimelineByUserId(userId) {
             return $http.get(`/api/user/${userId}/timeline/`);
+        }
+
+        // for admins
+        function getAllUsers() {
+            return $http.get(`/api/admin/users/`);
+        }
+
+        function deleteUser(uid) {
+            return $http.delete(`/api/admin/user/${uid}`);
         }
     }
 })();
