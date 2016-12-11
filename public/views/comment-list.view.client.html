@@ -6,7 +6,7 @@
         <blockquote>
             <p>{{comment.html}}</p>
             <small>
-                <a href="#{{vm.shared.getRoute('self_stock_detail', {symbol: comment.stock.Symbol})}}"> {{comment.stock}}</a>
+                <a href="#{{vm.shared.getRoute('self_stock_detail', {symbol: comment.stock})}}"> {{comment.stock}}</a>
                 <cite title="Source Title" class="text-muted">{{comment.createdAt}}</cite>
             </small>
         </blockquote>
