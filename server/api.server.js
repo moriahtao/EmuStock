@@ -5,7 +5,7 @@ module.exports = function (app, services) {
     app.get('/api/user/loggedin', services.user.loggedin);
     app.post('/api/user/register', services.user.register);
     app.post('/api/user/login', passport.authenticate('local'), services.user.currentUser);
-    app.get('/auth/facebook', passport.authenticate('facebook'));
+    app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
     app.get('/auth/facebook/callback', passport.authenticate('facebook', {
         successRedirect: '#/profile',
         failureRedirect: '/login'
