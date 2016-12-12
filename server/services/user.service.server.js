@@ -1,12 +1,20 @@
 module.exports = function (models) {
 
     var passport = require('passport');
-    var LocalStrategy = require('passport-local').Strategy;
     var bcrypt = require("bcrypt-nodejs");
+    var LocalStrategy = require('passport-local').Strategy;
+    var FacebookStrategy = require('passport-facebook').Strategy;
+    var facebookConfig = {
+        clientID: '1843752405840242',
+        clientSecret: '43810c2b03e3f0da19267178d9302466',
+        callbackURL: '/auth/facebook/callback',
+    };
 
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
     passport.use(new LocalStrategy(localStrategy));
+    passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+
 
     return {
         auth: auth,
@@ -56,6 +64,40 @@ module.exports = function (models) {
             },
             err => {
                 return done(err);
+            }
+        );
+    }
+
+    function facebookStrategy(token, refreshToken, profile, done) {
+        models.user.findOne({'facebook.id': profile.id}).then(
+            user => {
+                console.log('fb callback:', token, refreshToken, profile);
+                if (user) {
+                    return done(null, user);
+                } else {
+                    var newUser = {
+                        username: profile.username,
+                        name: {
+                            first: profile.name.givenName,
+                            last: profile.name.familyName,
+                        },
+                        facebook: {
+                            id: profile.id,
+                            token: token,
+                        },
+                    };
+                    return models.user.create(newUser);
+                }
+            },
+            err => {
+                if (err) return done(err);
+            }
+        ).then(
+            user => {
+                return done(null, user);
+            },
+            err => {
+                if (err) return done(err);
             }
         );
     }

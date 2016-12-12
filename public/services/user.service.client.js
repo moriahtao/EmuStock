@@ -20,9 +20,8 @@
             login: login,
             logout: logout,
             getTimelineByUserId: getTimelineByUserId,
-
             getAllUsers : getAllUsers,
-            deleteUser : deleteUser
+            deleteUser : deleteUser,
         };
 
         function login(user) {
