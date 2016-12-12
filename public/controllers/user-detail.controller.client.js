@@ -19,13 +19,13 @@
 
             vm.stocks = [];
 
-            quoteStocks();
 
             UserService.findUserById(vm.other_uid)
                 .then(
                     function (res) {
                         vm.other = res.data;
                         vm.other.followed = vm.other.followers.filter(x => x._id === vm.self._id).length >= 1;
+                        quoteStocks();
                     }
                 );
         }
@@ -56,7 +56,7 @@
         }
 
         function quoteStocks() {
-            for (var symbol of vm.user.stocks) {
+            for (var symbol of vm.other.stocks) {
                 StockService.quote(symbol).then(
                     res => vm.stocks.push(res.data)
                 )

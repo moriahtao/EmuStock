@@ -68,8 +68,7 @@ module.exports = function (models) {
     }
 
     function facebookStrategy(token, refreshToken, profile, done) {
-        models.user.findOne({'facebook.id': profile.id})
-            .populate('followings').populate('followers').then(
+        models.user.findOne({'facebook.id': profile.id}).then(
             user => {
                 console.log('fb callback:', token, refreshToken, profile);
                 if (user) {
