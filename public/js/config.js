@@ -26,8 +26,7 @@
                     templateUrl: item.view,
                     controller: item.controller,
                     controllerAs: 'vm',
-                    // TODO: uncomment this
-                    // resolve: item.isPublic ? {} : {loggedin: checkLoggedin},
+                    resolve: item.isPublic ? {} : {loggedin: checkLoggedin},
                 });
         });
 

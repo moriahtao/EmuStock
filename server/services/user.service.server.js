@@ -8,13 +8,13 @@ module.exports = function (models) {
         clientID: '1843752405840242',
         clientSecret: '43810c2b03e3f0da19267178d9302466',
         callbackURL: '/auth/facebook/callback',
+        profileFields: ['displayName', 'name', 'email'],
     };
 
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
     passport.use(new LocalStrategy(localStrategy));
     passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
-
 
     return {
         auth: auth,
@@ -32,9 +32,8 @@ module.exports = function (models) {
         unfollowStock: unfollowStock,
         followUser: followUser,
         unfollowUser: unfollowUser,
-        authAdmin, authAdmin,
+        authAdmin: authAdmin,
         findAllUsers: findAllUsers,
-        deleteUser: deleteUser,
         searchUserByUsername: searchUserByUsername,
     };
 
@@ -76,11 +75,12 @@ module.exports = function (models) {
                     return done(null, user);
                 } else {
                     var newUser = {
-                        username: profile.username,
+                        username: profile._json.name,
                         name: {
-                            first: profile.name.givenName,
-                            last: profile.name.familyName,
+                            first: profile._json.first_name,
+                            last: profile._json.last_name,
                         },
+                        email: profile._json.email,
                         facebook: {
                             id: profile.id,
                             token: token,

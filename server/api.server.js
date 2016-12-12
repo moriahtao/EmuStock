@@ -6,14 +6,13 @@ module.exports = function (app, services) {
     app.post('/api/user/register', services.user.register);
     app.post('/api/user/login', passport.authenticate('local'), services.user.currentUser);
     app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
-    app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-        successRedirect: '#/profile',
-        failureRedirect: '/login'
-    }));
+    app.get('/auth/facebook/callback',
+        passport.authenticate('facebook', {failureRedirect: '/#login'}),
+        (req, res) => res.redirect(`/#self/${req.user._id}`)
+    );
 
     // private APIs
-    // TODO: uncomment this
-    // app.all('/api/\*', services.user.auth);
+    app.all('/api/\*', services.user.auth);
     app.post('/api/user/logout', services.user.logout);
     app.get('/api/user/current', services.user.currentUser);
     app.get('/api/user/:userId', services.user.findUserById);
