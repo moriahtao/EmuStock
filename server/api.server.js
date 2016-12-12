@@ -8,7 +8,7 @@ module.exports = function (app, services) {
     app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
     app.get('/auth/facebook/callback',
         passport.authenticate('facebook', {failureRedirect: '/#login'}),
-        (req, res) => res.redirect(`/#self/${req.user._id}`)
+        (req, res) => res.redirect(`/#self/${req.user._id}/stocks`)
     );
 
     // private APIs
