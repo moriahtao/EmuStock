@@ -21,7 +21,7 @@
             for (var symbol of vm.user.stocks) {
                 StockService.quote(symbol).then(
                     res => vm.stocks.push(res.data)
-                )
+                );
             }
         }
 

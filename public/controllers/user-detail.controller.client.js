@@ -59,7 +59,7 @@
             for (var symbol of vm.other.stocks) {
                 StockService.quote(symbol).then(
                     res => vm.stocks.push(res.data)
-                )
+                );
             }
         }
 
