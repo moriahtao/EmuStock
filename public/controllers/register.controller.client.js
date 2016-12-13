@@ -26,7 +26,7 @@
                     .then(
                         function (res) {
                             console.log("Register success");
-                            $location.url(vm.shared.getRoute('timeline', {s_uid: res.data._id}));
+                            $location.url(vm.shared.getRoute('self_stocks', {s_uid: res.data._id}));
                         },
                         function (err) {
                             console.warn(err.data);
