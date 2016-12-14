@@ -9,25 +9,5 @@ Semester Project of CS5610 WebDev 2016 Fall
 ### Description
 EmuStock is a social platform for stock market investors. Deliver global real-time market data and share reviews among the users. You can build your own portfolios to follow and track your position.
 
-### Actors
-For this online stock emulator, the actors can be *buyers* and *administrators*.  
-* **Buyers** - normal users, buying shares during challenge seasons, connecting to and communicating with each others.
-* **Admins** - managing users' accounts, posts, and hosting challenge seasons.
-
-### Required Data Model
-1. **User** - personal information 
-2. **Domain object** - stock entities, pieces of related news
-3. **User to user relationship** - follows, comments under stocks 
-4. **User to domain object relationship** - user buy, hold, and sell stock shares
-5. **Domain to domain relationship** - a portfolio has many stocks 
-6. **One to many relationships** - a stock has many reviews
-7. **Many to many relationships** - a users has many followings and followers, a user reviews/holds many stocks and a stock is reviewed/held by many users
-
-### Feature Requirements
-1. **Home page**
-2. **Login / Register**
-3. **Profile**
-4. **Search / Search Results** - find stocks by name or id
-5. **Details Page** - show stats data of certain stock
-6. **Social Networking** - user communications
-7. **Web Service** - Finance, News
+### See More
+[Full Documentation on GoogleDocs](https://docs.google.com/document/d/1U5iJ8ODmOl0prdQHBIjg3bB-zX1dGcAFwzG6Wtet9uY/edit?usp=sharing_eixpa_nl&ts=584cdd71)
